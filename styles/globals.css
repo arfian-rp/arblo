@@ -8,7 +8,7 @@
   }
 
   .input {
-    @apply text-center border-2 border-secondary rounded-md p-1;
+    @apply text-center border-2 border-primary rounded-md p-1;
   }
 
   .btn {
