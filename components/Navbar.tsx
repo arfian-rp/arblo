@@ -12,7 +12,7 @@ export default function Navbar(props: Props) {
   return (
     <nav className="flex justify-between px-5 md:px-24  py-3 bg-primary text-secondary font-mono items-center">
       <Link href="/">
-        <div className="cursor-pointer std-transition hover:text-secHov text-3xl">arfblo</div>
+        <div className="cursor-pointer std-transition hover:text-secHov text-3xl font-semibold">arfblo</div>
       </Link>
       <div className="text-3xl">
         {props.isAuth ? (
