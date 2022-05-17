@@ -40,7 +40,7 @@ export default function PostDetile({ post, isAuth, userToken }: Props) {
   }
 
   return (
-    <Layout title={post.title} description={`${post.title}\npost: ${post.body}\nwritten by:${post.author}`} isAuth={isAuth} username={userToken?.username}>
+    <Layout title={post.title} description={`post: ${post.title}`} isAuth={isAuth} username={userToken?.username}>
       <Post _id={post._id!} title={post.title!} body={post.body!} author={post.author!} postedAt={post.postedAt!} reply={post.replys?.length!} mode={isAuth ? userToken?.username! === post?.author! : false} />
       <div className="my-10">
         {post.replys?.map((e, i) => (
