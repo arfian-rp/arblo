@@ -35,7 +35,7 @@ export default function Post({ user }: Props) {
     req(param);
   }
   return (
-    <Layout isAuth={true} username={user.username} title="Post">
+    <Layout title="Post" description="create new post" isAuth={true} username={user.username}>
       <div className="flex justify-center mt-[50vh] -translate-y-[75%]">
         <form onSubmit={post} className="flex flex-col gap-1 w-[70vw] md:w-[30vw]">
           <div className="text-center text-3xl">New Post</div>

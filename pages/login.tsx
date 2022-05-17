@@ -30,7 +30,7 @@ export default function Login() {
   }
 
   return (
-    <Layout title="Login" isAuth={false}>
+    <Layout title="Login" description="login page" isAuth={false}>
       <div>
         <form onSubmit={login} className="flex flex-col gap-2 p-5 md:w-[33vw] border-2 border-primary mx-auto mt-[50vh] -translate-y-[75%] rounded-md">
           <div className="text-center text-3xl">Login</div>

@@ -66,7 +66,7 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
   }, []);
 
   return (
-    <Layout isAuth={isAuth} username={userToken?.username} title={user?.username}>
+    <Layout title={user?.username} description={`profile ${user?.username}`} isAuth={isAuth} username={userToken?.username}>
       <div className="flex flex-col px-5 md:px-24 border-2 border-b-primary font-semibold">
         <div className="flex justify-between">
           <div>
