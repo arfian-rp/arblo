@@ -43,15 +43,15 @@ export default function Register() {
           <div className="text-center">{msg}</div>
           <div className="flex items-center justify-between">
             <label htmlFor="username">Username:</label>
-            <input value={username} onChange={(e) => setUsername(e.target.value.toLowerCase())} className="input" type="text" id="username" placeholder="username must be lowercase" autoFocus />
+            <input value={username} onChange={(e) => setUsername(e.target.value.toLowerCase())} className="input" type="text" id="username" placeholder="lowercase" autoFocus />
           </div>
           <div className="flex items-center justify-between">
             <label htmlFor="email">Email:</label>
-            <input value={email} onChange={(e) => setEmail(e.target.value.toLowerCase())} className="input" type="email" id="email" placeholder="email must be lowercase" />
+            <input value={email} onChange={(e) => setEmail(e.target.value.toLowerCase())} className="input" type="email" id="email" placeholder="lowercase" />
           </div>
           <div className="flex items-center justify-between">
             <label htmlFor="password">Password:</label>
-            <input value={password} onChange={(e) => setPassword(e.target.value)} className="input" type="password" id="password" placeholder="password minimum 8 characters" />
+            <input value={password} onChange={(e) => setPassword(e.target.value)} className="input" type="password" id="password" placeholder="min 8 characters" />
           </div>
           <div className="flex items-center justify-between">
             <label htmlFor="confirm">Confirm:</label>
