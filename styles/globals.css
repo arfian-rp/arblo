@@ -8,7 +8,7 @@
   }
 
   .input {
-    @apply text-center border-2 border-primary rounded-md p-1;
+    @apply text-center border-2 border-secondary rounded-md p-1;
   }
 
   .btn {
@@ -20,7 +20,7 @@
   }
 
   .textarea {
-    @apply border-2 border-primary p-2 rounded-md text-primary resize-none;
+    @apply border-2 border-primary p-2 rounded-md text-secondary resize-none;
   }
 
   .link {
