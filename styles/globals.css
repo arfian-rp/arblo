@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .std-transition {
+    @apply transition duration-300 ease-in-out;
+  }
+
+  .input {
+    @apply text-center border-2 border-primary rounded-md p-1;
+  }
+
+  .btn {
+    @apply border-2 border-primary py-1 px-5 rounded-md text-primary std-transition hover:bg-priHov hover:border-secHov hover:text-secHov;
+  }
+
+  .btnDel {
+    @apply border-2 border-red-500 py-1 px-5 rounded-md text-red-500 std-transition hover:bg-red-500 hover:border-secHov hover:text-secHov;
+  }
+
+  .textarea {
+    @apply border-2 border-primary p-2 rounded-md text-primary resize-none;
+  }
+
+  .link {
+    @apply text-blue-500 cursor-pointer;
+  }
+}
