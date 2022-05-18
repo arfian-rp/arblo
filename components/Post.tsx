@@ -16,7 +16,7 @@ export default function Post({ _id, title, body, author, postedAt, mode = false,
       url: "/api/post/delete",
       method: "delete",
       data: { _id },
-      result: () => window.location.reload(),
+      result: () => (window.location.pathname = "/"),
     };
     req(param);
   }
