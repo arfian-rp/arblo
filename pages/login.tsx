@@ -24,7 +24,7 @@ export default function Login() {
         setMsg("Success...");
         window.location.pathname = "/";
       },
-      error: () => setMsg("Error Login"),
+      error: () => setMsg("Error..."),
     };
     req(param);
   }

@@ -30,7 +30,7 @@ export default function Register() {
         setMsg("Success...");
         router.push("/login");
       },
-      error: () => setMsg("Username or Email has been registered"),
+      error: () => setMsg("Error..."),
     };
     req(param);
   }
