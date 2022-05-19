@@ -6,6 +6,8 @@ import { BiLogOut } from "react-icons/bi";
 import { MdOutlineModeEdit } from "react-icons/md";
 import Layout from "../../components/Layout";
 import Post from "../../components/Post";
+import { RiAccountCircleLine } from "react-icons/ri";
+import { BsThreeDotsVertical } from "react-icons/bs";
 import PostModel, { PostInterface } from "../../model/PostModel";
 import UserModel, { UserInterface } from "../../model/UserModel";
 import connectDb from "../../utils/connectDb";
@@ -68,27 +70,42 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
   return (
     <Layout title={user?.username} description={`profile ${user?.username}`} isAuth={isAuth} username={userToken?.username}>
       <div className="flex flex-col px-5 md:px-24 border-2 border-b-primary font-semibold">
-        <div className="flex justify-between">
+        <div className="s">
           <div>
-            <div className="text-3xl">{user?.username!}</div>
-            <div className="m-1">Created date: {new Date(user?.createdAt!).toLocaleDateString()}</div>
-            {userToken?.username! === user?.username ? (
-              <button onClick={() => router.push("/dash/edit-profile")} className="btn m-1">
-                <div className="flex gap-1 items-center">
-                  <MdOutlineModeEdit />
-                  <div>Profile</div>
+            <div className="text-3xl px-5 flex justify-between w-full">
+              <div className="flex items-center gap-5 p-5">
+                <RiAccountCircleLine /> {user?.username!}
+              </div>
+              <div className="flex items-center gap-5  group px-5">
+                <div className="flex flex-col items-center text-lg">
+                  <div className="text-2xl">{user?.numberOfPosts}</div>
+                  <div>Posts</div>
                 </div>
-              </button>
-            ) : (
-              <></>
-            )}
-          </div>
-          <div className="flex gap-5 items-center">
-            {userToken?.username! === user?.username ? <BiLogOut className="cursor-pointer text-red-500 text-3xl" onClick={logout} /> : <></>}
-            <div className="flex flex-col items-center text-lg">
-              <div className="text-2xl">{user?.numberOfPosts}</div>
-              <div>Posts</div>
+                <BsThreeDotsVertical className="group-hover:hidden" />
+                <div className="hidden group-hover:block absolute right-6 text-lg">
+                  {userToken?.username! === user?.username ? (
+                    <div className="border-2 border-black bg-white">
+                      {userToken?.username! === user?.username ? (
+                        <div className="flex gap-2 px-5 border-2 border-black cursor-pointer hover:bg-primary">
+                          <BiLogOut className="cursor-pointer text-red-500 text-3xl m-auto" onClick={logout} /> Logout
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+                      <div onClick={() => router.push(`/edit-profile`)} className="border-2 border-black text-secondary px-5 hover:bg-primary cursor-pointer">
+                        <div className="flex gap-1 items-center">
+                          <MdOutlineModeEdit />
+                          <div>Profile</div>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+              </div>
             </div>
+            <div className="m-1">Created date: {new Date(user?.createdAt!).toLocaleDateString()}</div>
           </div>
         </div>
         <div style={{ whiteSpace: "pre-line" }} className="text-lg my-5 md:w-[45vw]">
@@ -98,9 +115,7 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
 
       <div className="my-10">
         {posts.map((e: PostInterface) => (
-          <div key={e._id!} onClick={() => router.push(`/p/${e._id}`)}>
-            <Post _id={e._id!} title={e.title!} body={e.body!} author={e.author!} postedAt={e.postedAt!} mode={isAuth ? userToken?.username! === user?.username : false} reply={e.replys?.length} />
-          </div>
+          <Post _id={e._id!} title={e.title!} body={e.body!} author={e.author!} postedAt={e.postedAt!} mode={isAuth ? userToken?.username! === user?.username : false} reply={e.replys?.length} />
         ))}
       </div>
     </Layout>

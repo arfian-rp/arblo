@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
-import Layout from "../components/Layout";
 import jwt from "jsonwebtoken";
 import { GetServerSidePropsContext } from "next";
-import { Token } from "../utils/token";
+import React, { useEffect, useState } from "react";
+import Layout from "../components/Layout";
 import Post from "../components/Post";
 import PostModel, { PostInterface } from "../model/PostModel";
-import connectDb from "../utils/connectDb";
 import UserModel, { UserInterface } from "../model/UserModel";
+import connectDb from "../utils/connectDb";
 import req, { ReqParamInterface } from "../utils/req";
-import { useRouter } from "next/router";
+import { Token } from "../utils/token";
 
 const limit = 10;
 
@@ -20,7 +19,6 @@ interface Props {
   posts: PostInterface[];
 }
 export default function Home({ isAuth, userToken, user, count, posts: initialPost }: Props) {
-  const router = useRouter();
   const [posts, setPosts] = useState(initialPost);
   const [start, setStart] = useState(10);
 
@@ -56,9 +54,7 @@ export default function Home({ isAuth, userToken, user, count, posts: initialPos
     <Layout title="Arblo" isAuth={isAuth} username={user?.username}>
       <div className="my-10">
         {posts.map((e: PostInterface) => (
-          <div key={e._id!} onClick={() => router.push(`/p/${e._id}`)}>
-            <Post _id={e._id!} title={e.title!} body={e.body!} author={e.author!} postedAt={e.postedAt!} mode={userToken?.username! === e.author} reply={e.replys?.length} />
-          </div>
+          <Post _id={e._id!} title={e.title!} body={e.body!} author={e.author!} postedAt={e.postedAt!} mode={userToken?.username! === e.author} reply={e.replys?.length} />
         ))}
       </div>
     </Layout>
@@ -72,12 +68,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   if (context.req.cookies.refreshToken) {
     try {
       const token = JSON.parse(JSON.stringify(await jwt.verify(context.req.cookies.refreshToken, process.env.REFRESH_TOKEN!)));
-      const user = JSON.parse(JSON.stringify(await UserModel.findOne({ username: token.username })));
-      if (user) {
+      const userToken = JSON.parse(JSON.stringify(await UserModel.findOne({ username: token.username })));
+      if (userToken) {
         return {
           props: {
             isAuth: true,
-            user,
+            userToken,
             token,
             count,
             posts,

@@ -48,7 +48,7 @@ export default function PostDetile({ post, isAuth, userToken }: Props) {
         ))}
       </div>
       {isAuth ? (
-        <div className="flex justify-center mt-20 mx-5 md:mx-24 lg:mx-[30vw]">
+        <div className="flex justify-center mt-20 mx-5 md:mx-24 lg:mx-[30vw] py-20">
           <form onSubmit={reply} className="flex flex-col gap-1 w-[100%]">
             <div className="text-center text-3xl">New Reply</div>
             <div className="text-center">{msg}</div>
