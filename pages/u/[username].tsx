@@ -68,7 +68,7 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
   }, []);
 
   return (
-    <Layout title={user?.username} description={`profile ${user?.username}`} isAuth={isAuth} username={userToken?.username}>
+    <Layout title={userToken?.username} description={`profile ${user?.username}`} isAuth={isAuth} username={userToken?.username}>
       <div className="flex flex-col px-5 md:px-24 border-2 border-b-primary font-semibold">
         <div className="s">
           <div>
@@ -126,7 +126,15 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   connectDb();
   const posts = JSON.parse(JSON.stringify(await PostModel.find({ author: context.params?.username }).skip(0).limit(limit).sort({ postedAt: -1 })));
   const user = JSON.parse(JSON.stringify(await UserModel.findOne({ username: context.params?.username })));
-
+  if (!user) {
+    return {
+      redirect: {
+        permanent: true,
+        destination: "/",
+      },
+      props: {},
+    };
+  }
   if (context.req.cookies.refreshToken) {
     try {
       const token = JSON.parse(JSON.stringify(await jwt.verify(context.req.cookies.refreshToken, process.env.REFRESH_TOKEN!)));
