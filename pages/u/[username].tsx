@@ -139,7 +139,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     try {
       const token = JSON.parse(JSON.stringify(await jwt.verify(context.req.cookies.refreshToken, process.env.REFRESH_TOKEN!)));
       const userToken = JSON.parse(JSON.stringify(await UserModel.findOne({ username: token.username })));
-      if (userToken) {
+      if ("username" in userToken) {
         return {
           props: {
             isAuth: true,
