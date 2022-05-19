@@ -76,12 +76,12 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
               <div className="flex items-center gap-5 p-5">
                 <RiAccountCircleLine /> {user?.username!}
               </div>
-              <div className="flex items-center gap-5  group px-5">
+              <div className="flex items-center gap-5 group px-5">
                 <div className="flex flex-col items-center text-lg">
                   <div className="text-2xl">{user?.numberOfPosts}</div>
                   <div>Posts</div>
                 </div>
-                <BsThreeDotsVertical className="group-hover:hidden" />
+                <BsThreeDotsVertical />
                 <div className="hidden group-hover:block absolute right-6 text-lg">
                   {userToken?.username! === user?.username ? (
                     <div className="border-2 border-black bg-white">
