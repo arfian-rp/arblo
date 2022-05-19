@@ -68,7 +68,7 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
   }, []);
 
   return (
-    <Layout title={userToken?.username} description={`profile ${user?.username}`} isAuth={isAuth} username={userToken?.username}>
+    <Layout title={user?.username} description={`profile ${user?.username}`} isAuth={isAuth} username={userToken?.username}>
       <div className="flex flex-col px-5 md:px-24 border-2 border-b-primary font-semibold">
         <div className="s">
           <div>
