@@ -92,7 +92,7 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
                       ) : (
                         <></>
                       )}
-                      <div onClick={() => router.push(`/edit-profile`)} className="border-2 border-black text-secondary px-5 hover:bg-primary cursor-pointer">
+                      <div onClick={() => router.push(`/dash/edit-profile`)} className="border-2 border-black text-secondary px-5 hover:bg-primary cursor-pointer">
                         <div className="flex gap-1 items-center">
                           <MdOutlineModeEdit />
                           <div>Profile</div>
