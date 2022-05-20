@@ -59,14 +59,16 @@ export default function Post({ _id, title, body, author, postedAt, mode = false,
       <div style={{ whiteSpace: "pre-line" }} className="p-4 border-2 border-b-primary">
         {body}
       </div>
-      <button onClick={() => router.push(`/p/${_id}`)} className="flex justify-between my-1 px-2">
-        <div className="flex gap-2 items-center cursor-pointer">
-          <GoComment className="text-2xl my-3" />: {reply}
-        </div>
-        <div className="flex gap-2 items-center">
-          <div>{new Date(postedAt).toLocaleDateString()}</div>
-        </div>
-      </button>
+      <div className="flex justify-between my-1 px-2">
+        <button onClick={() => router.push(`/p/${_id}`)}>
+          <div className="flex gap-2 items-center cursor-pointer">
+            <GoComment className="text-2xl my-3" />: {reply}
+          </div>
+          <div className="flex gap-2 items-center">
+            <div>{new Date(postedAt).toLocaleDateString()}</div>
+          </div>
+        </button>
+      </div>
     </div>
   );
 }
