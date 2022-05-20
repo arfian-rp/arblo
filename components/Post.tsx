@@ -63,7 +63,7 @@ export default function Post({ _id, title, body, author, postedAt, mode = false,
         <button onClick={() => router.push(`/p/${_id}`)} className="flex gap-2 items-center">
           <GoComment className="text-2xl my-3" />: {reply}
         </button>
-        <div className="flex gap-2 items-center">
+        <div className="flex gap-2 items-center cursor-pointer">
           <div>{new Date(postedAt).toLocaleDateString()}</div>
         </div>
       </div>
