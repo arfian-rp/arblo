@@ -51,7 +51,7 @@ export default function Edit({ user }: Props) {
 
   return (
     <Layout title="Edit Profile" description="edit profile" isAuth={true} username={user.username}>
-      <div>
+      <div className="mx-10">
         <form onSubmit={edit} className="flex flex-col gap-2 p-5 md:w-[33vw] border-2 border-primary mx-auto mt-[50vh] -translate-y-[75%] rounded-md">
           <div className="text-center text-3xl">Edit Profile</div>
           <div className="text-center">{msg}</div>

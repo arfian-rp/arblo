@@ -37,7 +37,7 @@ export default function Register() {
 
   return (
     <Layout title="Register" description="register page" isAuth={false}>
-      <div>
+      <div className="mx-10">
         <form onSubmit={register} className="flex flex-col gap-2 p-5 md:w-[33vw] border-2 border-primary mx-auto mt-[50vh] -translate-y-[75%] rounded-md">
           <div className="text-center text-3xl">Register</div>
           <div className="text-center">{msg}</div>
