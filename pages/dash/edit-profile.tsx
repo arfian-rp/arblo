@@ -57,15 +57,15 @@ export default function Edit({ user }: Props) {
           <div className="text-center">{msg}</div>
           <div className="flex items-center justify-between">
             <label htmlFor="username">Username:</label>
-            <input value={username} onChange={(e) => setUsername(e.target.value.toLowerCase())} className="input" type="text" id="username" placeholder="lowercase" autoFocus />
+            <input value={username} onChange={(e) => setUsername(e.target.value.toLowerCase())} className="input w-[15rem]" type="text" id="username" placeholder="lowercase" autoFocus />
           </div>
           <div className="flex items-center justify-between">
             <label htmlFor="email">Email:</label>
-            <input value={email} onChange={(e) => setEmail(e.target.value.toLowerCase())} className="input" type="email" id="email" placeholder="lowercase" />
+            <input value={email} onChange={(e) => setEmail(e.target.value.toLowerCase())} className="input w-[15rem]" type="email" id="email" placeholder="lowercase" />
           </div>
           <div className="flex items-center justify-between">
             <label htmlFor="bio">Bio:</label>
-            <textarea value={bio} onChange={(e) => setBio(e.target.value)} className="textarea" placeholder="max 150 characters"></textarea>
+            <textarea value={bio} onChange={(e) => setBio(e.target.value)} className="textarea w-[15rem]" placeholder="max 150 characters"></textarea>
           </div>
           <div>
             <button className="btn" type="submit">
