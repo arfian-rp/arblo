@@ -51,7 +51,7 @@ export default function Home({ isAuth, userToken, user, count, posts: initialPos
   }, []);
 
   return (
-    <Layout title="Arblo" isAuth={isAuth} username={user?.username}>
+    <Layout title="Arblo" isAuth={isAuth} username={userToken?.username}>
       <div className="my-10">
         {posts.map((e: PostInterface) => (
           <Post key={e._id} _id={e._id!} title={e.title!} body={e.body!} author={e.author!} postedAt={e.postedAt!} mode={userToken?.username! === e.author} reply={e.replys?.length} />
