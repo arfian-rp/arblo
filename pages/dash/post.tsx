@@ -44,7 +44,7 @@ export default function Post({ user }: Props) {
             <input autoFocus value={title} onChange={(e) => setTitle(e.target.value)} className="input w-full text-left" type="text" placeholder="title..." />
           </div>
           <div>
-            <textarea value={body} onChange={(e) => setBody(e.target.value)} className="textarea w-full h-40" placeholder="body"></textarea>
+            <textarea value={body} onChange={(e) => setBody(e.target.value)} className="textarea w-full h-40" placeholder="body..."></textarea>
           </div>
           <div>
             <button className="btn" type="submit">
