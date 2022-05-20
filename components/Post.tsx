@@ -60,7 +60,7 @@ export default function Post({ _id, title, body, author, postedAt, mode = false,
         {body}
       </div>
       <div className="flex justify-between my-1 px-2">
-        <button onClick={() => router.push(`/p/${_id}`)} className="flex gap-2 items-center cursor-pointer">
+        <button onClick={() => router.push(`/p/${_id}`)} className="flex gap-2 items-center">
           <GoComment className="text-2xl my-3" />: {reply}
         </button>
         <div className="flex gap-2 items-center">
