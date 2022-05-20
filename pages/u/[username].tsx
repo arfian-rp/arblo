@@ -72,7 +72,7 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
       <div className="flex flex-col px-5 md:px-24 border-2 border-b-primary font-semibold">
         <div className="s">
           <div>
-            <div className="text-3xl px-5 flex justify-between w-full">
+            <div className="text-3xl px-3 flex justify-between w-full">
               <div className="flex items-center gap-5">
                 <RiAccountCircleLine /> {user?.username!}
               </div>
