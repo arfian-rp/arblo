@@ -36,7 +36,7 @@ export default function Reply({ reply, _idPost, mode = false }: Props) {
         {mode ? (
           <div className="px-5 group cursor-pointer">
             <BsThreeDotsVertical className="group-hover:hidden" />
-            <div className="hidden group-hover:block absolute right-6">
+            <div className="hidden group-hover:block absolute right-6 top-2">
               <div className="border-2 border-black bg-white">
                 <div onClick={del} className="border-2 border-black text-secondary px-5 hover:bg-primary">
                   delete
