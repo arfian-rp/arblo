@@ -84,7 +84,7 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
                 {userToken?.username! === user?.username ? (
                   <>
                     <BsThreeDotsVertical />
-                    <div className="hidden group-hover:block absolute right-6 top-5 text-lg">
+                    <div className="hidden group-hover:block absolute right-6 top-16 text-lg">
                       <div className="border-2 border-black bg-white">
                         {userToken?.username! === user?.username ? (
                           <div className="flex gap-2 px-5 border-2 border-black cursor-pointer hover:bg-primary">
