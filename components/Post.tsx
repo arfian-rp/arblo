@@ -38,7 +38,7 @@ export default function Post({ _id, title, body, author, postedAt, mode = false,
           </div>
           <div className="px-5 group cursor-pointer">
             <BsThreeDotsVertical className="group-hover:hidden" />
-            <div className="hidden group-hover:block absolute right-6 top-2">
+            <div className="hidden group-hover:block absolute right-6 top-5">
               <div className="border-2 border-black bg-white">
                 {mode ? (
                   <div onClick={del} className="border-2 border-black text-secondary px-5 hover:bg-primary">
