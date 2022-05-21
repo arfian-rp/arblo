@@ -81,28 +81,30 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
                   <div className="text-2xl">{user?.numberOfPosts}</div>
                   <div>Posts</div>
                 </div>
-                <BsThreeDotsVertical />
-                <div className="hidden group-hover:block absolute right-6 top-5 text-lg">
-                  {userToken?.username! === user?.username ? (
-                    <div className="border-2 border-black bg-white">
-                      {userToken?.username! === user?.username ? (
-                        <div className="flex gap-2 px-5 border-2 border-black cursor-pointer hover:bg-primary">
-                          <BiLogOut className="cursor-pointer text-red-500 text-3xl m-auto" onClick={logout} /> Logout
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                      <div onClick={() => router.push(`/dash/edit-profile`)} className="border-2 border-black text-secondary px-5 hover:bg-primary cursor-pointer">
-                        <div className="flex gap-1 items-center">
-                          <MdOutlineModeEdit />
-                          <div>Profile</div>
+                {userToken?.username! === user?.username ? (
+                  <>
+                    <BsThreeDotsVertical />
+                    <div className="hidden group-hover:block absolute right-6 top-5 text-lg">
+                      <div className="border-2 border-black bg-white">
+                        {userToken?.username! === user?.username ? (
+                          <div className="flex gap-2 px-5 border-2 border-black cursor-pointer hover:bg-primary">
+                            <BiLogOut className="cursor-pointer text-red-500 text-3xl m-auto" onClick={logout} /> Logout
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                        <div onClick={() => router.push(`/dash/edit-profile`)} className="border-2 border-black text-secondary px-5 hover:bg-primary cursor-pointer">
+                          <div className="flex gap-1 items-center">
+                            <MdOutlineModeEdit />
+                            <div>Profile</div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  ) : (
-                    <></>
-                  )}
-                </div>
+                  </>
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
             <div className="m-1">Created date: {new Date(user?.createdAt!).toLocaleDateString()}</div>
