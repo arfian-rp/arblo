@@ -1,9 +1,10 @@
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import { NextApiRequest, NextApiResponse } from "next";
 import UserModel from "../../../model/UserModel";
 import connectDb from "../../../utils/connectDb";
-import jwt from "jsonwebtoken";
 import { setCookie } from "../../../utils/cookie";
+import { resUtilError, resUtilSuccess } from "../../../utils/resUtil";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
@@ -33,13 +34,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 maxAge: 12 * 60 * 60 * 1000,
                 path: "/",
               });
-              res.status(200).json({ status: 200 });
+              resUtilSuccess(res);
             })
-            .catch(() => res.status(400).json({ status: 400 }));
-        } else res.status(400).json({ status: 400 });
-      } else res.status(400).json({ status: 400 });
+            .catch(() => resUtilError(res));
+        } else resUtilError(res);
+      } else resUtilError(res);
     } catch (error) {
-      res.status(400).json({ status: 400 });
+      resUtilError(res, { error });
     }
-  } else res.status(400).json({ status: 400 });
+  } else resUtilError(res);
 }

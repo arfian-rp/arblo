@@ -1,17 +1,17 @@
-import jwt from "jsonwebtoken";
 import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { BiLogOut } from "react-icons/bi";
+import { BsThreeDotsVertical } from "react-icons/bs";
 import { MdOutlineModeEdit } from "react-icons/md";
+import { RiAccountCircleLine } from "react-icons/ri";
 import Layout from "../../components/Layout";
 import Post from "../../components/Post";
-import { RiAccountCircleLine } from "react-icons/ri";
-import { BsThreeDotsVertical } from "react-icons/bs";
 import PostModel, { PostInterface } from "../../model/PostModel";
 import UserModel, { UserInterface } from "../../model/UserModel";
 import connectDb from "../../utils/connectDb";
 import req, { ReqParamInterface } from "../../utils/req";
+import verifyToken from "../../utils/verifyToken";
 
 const limit = 10;
 
@@ -139,8 +139,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   }
   if (context.req.cookies.refreshToken) {
     try {
-      const token = JSON.parse(JSON.stringify(await jwt.verify(context.req.cookies.refreshToken, process.env.REFRESH_TOKEN!)));
-      const userToken = JSON.parse(JSON.stringify(await UserModel.findOne({ username: token.username })));
+      const { userToken } = await verifyToken(context.req.cookies.refreshToken);
       if ("username" in userToken) {
         return {
           props: {

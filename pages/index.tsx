@@ -1,24 +1,22 @@
-import jwt from "jsonwebtoken";
 import { GetServerSidePropsContext } from "next";
 import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import Post from "../components/Post";
 import PostModel, { PostInterface } from "../model/PostModel";
-import UserModel, { UserInterface } from "../model/UserModel";
 import connectDb from "../utils/connectDb";
 import req, { ReqParamInterface } from "../utils/req";
 import { Token } from "../utils/token";
+import verifyToken from "../utils/verifyToken";
 
 const limit = 10;
 
 interface Props {
   isAuth: boolean;
   userToken?: Token;
-  user?: UserInterface;
   count: number;
   posts: PostInterface[];
 }
-export default function Home({ isAuth, userToken, user, count, posts: initialPost }: Props) {
+export default function Home({ isAuth, userToken, count, posts: initialPost }: Props) {
   const [posts, setPosts] = useState(initialPost);
   const [start, setStart] = useState(10);
 
@@ -67,14 +65,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const posts = JSON.parse(JSON.stringify(await PostModel.find().skip(0).limit(limit).sort({ postedAt: -1 })));
   if (context.req.cookies.refreshToken) {
     try {
-      const token = JSON.parse(JSON.stringify(await jwt.verify(context.req.cookies.refreshToken, process.env.REFRESH_TOKEN!)));
-      const userToken = JSON.parse(JSON.stringify(await UserModel.findOne({ username: token.username })));
+      const { userToken } = await verifyToken(context.req.cookies.refreshToken);
       if (userToken) {
         return {
           props: {
             isAuth: true,
             userToken,
-            token,
             count,
             posts,
           },
