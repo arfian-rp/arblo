@@ -5,6 +5,7 @@ import Layout from "../../components/Layout";
 import UserModel, { UserInterface } from "../../model/UserModel";
 import connectDb from "../../utils/connectDb";
 import req, { ReqParamInterface } from "../../utils/req";
+import verifyToken from "../../utils/verifyToken";
 
 interface Props {
   user: UserInterface;
@@ -78,43 +79,12 @@ export default function Edit({ user }: Props) {
   );
 }
 
-// export async function getServerSideProps(context: GetServerSidePropsContext) {
-//   try {
-//     const token = JSON.parse(JSON.stringify(await jwt.verify(context.req.cookies.refreshToken, process.env.REFRESH_TOKEN!)));
-//     if (token) {
-//       connectDb();
-//       const user = JSON.parse(JSON.stringify(await UserModel.findOne({ _id: token._id })));
-//       if (user) {
-//         return {
-//           props: {
-//             user,
-//           },
-//         };
-//       } else {
-//         return {
-//           redirect: {
-//             permanent: true,
-//             destination: "/",
-//           },
-//           props: {},
-//         };
-//       }
-//     } else {
-//       return {
-//         redirect: {
-//           permanent: true,
-//           destination: "/",
-//         },
-//         props: {},
-//       };
-//     }
-//   } catch (e) {
-//     return {
-//       redirect: {
-//         permanent: true,
-//         destination: "/",
-//       },
-//       props: {},
-//     };
-//   }
-// }
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  connectDb();
+  const { userToken } = await verifyToken(context.req.cookies.refreshToken);
+  return {
+    props: {
+      user: userToken,
+    },
+  };
+}
