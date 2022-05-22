@@ -2,12 +2,12 @@ import { GetServerSidePropsContext } from "next";
 import React, { FormEvent, useState } from "react";
 import Layout from "../../components/Layout";
 import Post from "../../components/Post";
-import PostModel, { PostInterface } from "../../model/PostModel";
-import connectDb from "../../utils/connectDb";
-import jwt from "jsonwebtoken";
-import UserModel, { UserInterface } from "../../model/UserModel";
 import Reply from "../../components/Reply";
+import PostModel, { PostInterface } from "../../model/PostModel";
+import { UserInterface } from "../../model/UserModel";
+import connectDb from "../../utils/connectDb";
 import req, { ReqParamInterface } from "../../utils/req";
+import verifyToken from "../../utils/verifyToken";
 
 interface Props {
   post: PostInterface;
@@ -74,8 +74,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const post = JSON.parse(JSON.stringify(await PostModel.findOne({ _id: context.params?._id })));
   if (context.req.cookies.refreshToken) {
     try {
-      const token = JSON.parse(JSON.stringify(await jwt.verify(context.req.cookies.refreshToken, process.env.REFRESH_TOKEN!)));
-      const userToken = JSON.parse(JSON.stringify(await UserModel.findOne({ username: token.username })));
+      const { userToken } = await verifyToken(context.req.cookies.refreshToken);
       if (userToken) {
         return {
           props: {
