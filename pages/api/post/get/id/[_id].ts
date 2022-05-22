@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import PostModel from "../../../../../model/PostModel";
 import connectDb from "../../../../../utils/connectDb";
-import { resUtilError, resUtilSuccess } from "../../../../../utils/resUtil";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
@@ -9,9 +8,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const { _id } = req.query;
     try {
       const post = await PostModel.findById(_id);
-      resUtilSuccess(res, { post });
-    } catch (error) {
-      resUtilError(res, { error });
+      res.status(200).json({ post });
+    } catch (e) {
+      res.status(400).json({ status: 400 });
     }
-  } else resUtilError(res);
+  } else res.status(400).json({ status: 400 });
 }

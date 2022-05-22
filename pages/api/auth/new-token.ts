@@ -3,14 +3,12 @@ import UserModel from "../../../model/UserModel";
 import connectDb from "../../../utils/connectDb";
 import jwt from "jsonwebtoken";
 import { setCookie } from "../../../utils/cookie";
-import verifyToken from "../../../utils/verifyToken";
-import { resUtilError, resUtilSuccess } from "../../../utils/resUtil";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
     connectDb();
     const { username } = req.body;
-    const { token } = await verifyToken(req.cookies.refreshToken, false);
+    const token = JSON.parse(JSON.stringify(await jwt.verify(req.cookies.refreshToken, process.env.REFRESH_TOKEN!)));
     if (token) {
       try {
         const refreshToken = await jwt.sign({ _id: token?._id, username }, process.env.REFRESH_TOKEN!, { expiresIn: "12h" });
@@ -26,12 +24,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               maxAge: 12 * 60 * 60 * 1000,
               path: "/",
             });
-            resUtilSuccess(res);
+            res.status(200).json({ status: 200 });
           })
-          .catch(() => resUtilError(res));
+          .catch(() => res.status(400).json({ status: 400 }));
       } catch (error) {
-        resUtilError(res, { error });
+        res.status(400).json({ status: 400 });
       }
-    } else resUtilError(res);
-  } else resUtilError(res);
+    } else res.status(400).json({ status: 400 });
+  } else res.status(400).json({ status: 400 });
 }

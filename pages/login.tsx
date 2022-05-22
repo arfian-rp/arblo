@@ -1,9 +1,9 @@
+import jwt from "jsonwebtoken";
 import { GetServerSidePropsContext } from "next";
 import Link from "next/link";
 import React, { FormEvent, useState } from "react";
 import Layout from "../components/Layout";
 import req, { ReqParamInterface } from "../utils/req";
-import verifyToken from "../utils/verifyToken";
 
 export default function Login() {
   const [msg, setMsg] = useState("");
@@ -62,7 +62,7 @@ export default function Login() {
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   if (context.req.cookies.refreshToken) {
     try {
-      const { token } = await verifyToken(context.req.cookies.refreshToken, false);
+      const token = await jwt.verify(context.req.cookies.refreshToken, process.env.REFRESH_TOKEN!);
       if (token) {
         return {
           redirect: {

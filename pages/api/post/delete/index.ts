@@ -2,26 +2,24 @@ import { NextApiRequest, NextApiResponse } from "next";
 import PostModel from "../../../../model/PostModel";
 import UserModel from "../../../../model/UserModel";
 import connectDb from "../../../../utils/connectDb";
-import { resUtilError, resUtilSuccess } from "../../../../utils/resUtil";
-import verifyToken from "../../../../utils/verifyToken";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "DELETE") {
     connectDb();
     const { _id } = req.body;
     try {
-      const { token } = await verifyToken(req.cookies.refreshToken, false);
+      const token = JSON.parse(JSON.stringify(await jwt.verify(req.cookies.refreshToken, process.env.REFRESH_TOKEN!)));
       UserModel.updateOne({ username: token.username }, { $inc: { numberOfPosts: -1 } })
         .then(() => {
           PostModel.deleteOne({ _id })
             .then(() => {
-              resUtilSuccess(res);
+              res.status(200).json({ status: 200 });
             })
-            .catch(() => resUtilError(res));
+            .catch(() => res.status(400).json({ status: 400 }));
         })
-        .catch(() => resUtilError(res));
-    } catch (error) {
-      resUtilError(res, { error });
+        .catch(() => res.status(400).json({ status: 400 }));
+    } catch (e) {
+      res.status(400).json({ status: 400 });
     }
-  } else resUtilError(res);
+  } else res.status(400).json({ status: 400 });
 }

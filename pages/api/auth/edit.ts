@@ -1,15 +1,14 @@
+import jwt from "jsonwebtoken";
 import { NextApiRequest, NextApiResponse } from "next";
 import UserModel from "../../../model/UserModel";
 import connectDb from "../../../utils/connectDb";
-import { resUtilError, resUtilSuccess } from "../../../utils/resUtil";
-import verifyToken from "../../../utils/verifyToken";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
     connectDb();
     const { username, email, bio } = req.body;
     try {
-      const { token } = await verifyToken(req.cookies.refreshToken, false);
+      const token = JSON.parse(JSON.stringify(await jwt.verify(req.cookies.refreshToken, process.env.REFRESH_TOKEN!)));
       if (token) {
         UserModel.updateOne(
           { username: token.username },
@@ -20,11 +19,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             updatedAt: new Date().getTime(),
           }
         )
-          .then(() => resUtilSuccess(res))
-          .catch(() => resUtilError(res));
+          .then(() => res.status(200).json({ status: 200 }))
+          .catch(() => res.status(400).json({ status: 400 }));
       }
     } catch (e) {
-      resUtilError(res);
+      res.status(400).json({ status: 400 });
     }
-  } else resUtilError(res);
+  } else res.status(400).json({ status: 400 });
 }
