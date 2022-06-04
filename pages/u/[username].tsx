@@ -55,17 +55,6 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
     req(param);
   }
 
-  window.addEventListener("scroll", () => {
-    if (posts.length < user?.numberOfPosts!) {
-      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-      const scrolled = window.scrollY;
-      if (Math.ceil(scrolled) === scrollable) {
-        console.info(posts.length, user?.numberOfPosts!);
-        load();
-      }
-    }
-  });
-
   return (
     <Layout title={user?.username} description={`profile ${user?.username}`} isAuth={isAuth} username={userToken?.username}>
       <div className="flex flex-col px-5 md:px-24 border-2 border-b-primary font-semibold">
@@ -121,11 +110,10 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
             <Post key={e._id} _id={e._id!} title={e.title!} body={e.body!} author={e.author!} postedAt={e.postedAt!} mode={isAuth ? userToken?.username! === user?.username : false} reply={e.replys?.length} />
           </>
         ))}
-        {user?.numberOfPosts! > limit && (
-          <div>
-            <br />
-            <div className="text-center text-3xl">Loading...</div>
-          </div>
+        {posts.length < user?.numberOfPosts! && (
+          <button onClick={() => load()} className="btn">
+            Load More
+          </button>
         )}
         <br />
       </div>
