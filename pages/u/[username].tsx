@@ -57,8 +57,8 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
 
   return (
     <Layout title={user?.username} description={`profile ${user?.username}`} isAuth={isAuth} username={userToken?.username}>
-      <div className="relative flex flex-col mx-5 md:mx-24 lg:mx-[30vw] border-2 border-b-primary font-semibold">
-        <div className="s">
+      <div className="relative flex flex-col px-5 mx-5 md:mx-24 lg:mx-[30vw] border-2 border-b-primary font-semibold">
+        <div>
           <div>
             <div className="text-3xl px-3 flex justify-between w-full">
               <div className="flex items-center gap-5">
@@ -72,7 +72,7 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
                 {userToken?.username! === user?.username ? (
                   <>
                     <BsThreeDotsVertical />
-                    <div className="hidden group-hover:block absolute right-6 top-5">
+                    <div className="hidden group-hover:block absolute right-6 top-5 text-lg">
                       <div className="border-2 border-black bg-white">
                         <div className="flex gap-2 px-5 border-2 border-black cursor-pointer hover:bg-primary">
                           <BiLogOut className="cursor-pointer text-red-500 text-3xl m-auto" onClick={logout} /> Logout
