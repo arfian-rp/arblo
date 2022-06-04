@@ -104,16 +104,15 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
       </div>
 
       <div className="my-10">
-        {posts.map((e: PostInterface, i) => (
-          <>
-            {i}
-            <Post key={e._id} _id={e._id!} title={e.title!} body={e.body!} author={e.author!} postedAt={e.postedAt!} mode={isAuth ? userToken?.username! === user?.username : false} reply={e.replys?.length} />
-          </>
+        {posts.map((e: PostInterface) => (
+          <Post key={e._id} _id={e._id!} title={e.title!} body={e.body!} author={e.author!} postedAt={e.postedAt!} mode={isAuth ? userToken?.username! === user?.username : false} reply={e.replys?.length} />
         ))}
         {posts.length < user?.numberOfPosts! && (
-          <button onClick={() => load()} className="btn">
-            Load More
-          </button>
+          <div className="flex justify-center py-12">
+            <button onClick={() => load()} className="btn text-lg">
+              Load More
+            </button>
+          </div>
         )}
         <br />
       </div>
