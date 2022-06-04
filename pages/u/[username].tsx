@@ -57,7 +57,7 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
 
   return (
     <Layout title={user?.username} description={`profile ${user?.username}`} isAuth={isAuth} username={userToken?.username}>
-      <div className="relative flex flex-col px-5 mx-5 md:px-24 lg:px-[30vw] border-2 border-b-primary font-semibold">
+      <div className="flex flex-col px-5 mx-5 md:px-24 lg:px-[30vw] border-2 border-b-primary font-semibold">
         <div className="s">
           <div>
             <div className="text-3xl px-3 flex justify-between w-full">
@@ -72,15 +72,11 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
                 {userToken?.username! === user?.username ? (
                   <>
                     <BsThreeDotsVertical />
-                    <div className="hidden group-hover:block absolute right-6 top-20 text-lg">
+                    <div className="hidden group-hover:block absolute right-6 top-5">
                       <div className="border-2 border-black bg-white">
-                        {userToken?.username! === user?.username ? (
-                          <div className="flex gap-2 px-5 border-2 border-black cursor-pointer hover:bg-primary">
-                            <BiLogOut className="cursor-pointer text-red-500 text-3xl m-auto" onClick={logout} /> Logout
-                          </div>
-                        ) : (
-                          <></>
-                        )}
+                        <div className="flex gap-2 px-5 border-2 border-black cursor-pointer hover:bg-primary">
+                          <BiLogOut className="cursor-pointer text-red-500 text-3xl m-auto" onClick={logout} /> Logout
+                        </div>
                         <div onClick={() => router.push(`/dash/edit-profile`)} className="border-2 border-black text-secondary px-5 hover:bg-primary cursor-pointer">
                           <div className="flex gap-1 items-center">
                             <MdOutlineModeEdit />
