@@ -47,9 +47,8 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
         skip: start,
       },
       method: "post",
-      result: (s) => {
-        console.info(s);
-        // setPosts([...posts, ...newPost]);
+      result: ({ posts: newPost }) => {
+        setPosts([...posts, ...newPost]);
         setStart(start + limit);
         /**
          * 1=> 0 2
