@@ -13,7 +13,7 @@ import connectDb from "../../utils/connectDb";
 import req, { ReqParamInterface } from "../../utils/req";
 import verifyToken from "../../utils/verifyToken";
 
-const limit = 10;
+const limit = 2;
 
 interface Props {
   isAuth: boolean;
