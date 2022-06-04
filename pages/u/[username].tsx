@@ -24,7 +24,7 @@ interface Props {
 export default function Profile({ isAuth, userToken, user, posts: initialPosts }: Props) {
   const router = useRouter();
   const [posts, setPosts] = useState(initialPosts);
-  const [start, setStart] = useState(2);
+  const [start, setStart] = useState(limit);
 
   function logout() {
     const param: ReqParamInterface = {
@@ -59,17 +59,17 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
     req(param);
   }
 
-  // useEffect(() => {
-  //   window.addEventListener("scroll", () => {
-  //     const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-  //     const scrolled = window.scrollY;
-  //     if (Math.ceil(scrolled) === scrollable) {
-  //       if (user?.numberOfPosts! > limit) {
-  //         load();
-  //       }
-  //     }
-  //   });
-  // }, []);
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      if (Math.ceil(scrolled) === scrollable) {
+        if (user?.numberOfPosts! > limit) {
+          load();
+        }
+      }
+    });
+  }, []);
 
   return (
     <Layout title={user?.username} description={`profile ${user?.username}`} isAuth={isAuth} username={userToken?.username}>
@@ -123,7 +123,7 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
         {posts.map((e: PostInterface) => (
           <Post key={e._id} _id={e._id!} title={e.title!} body={e.body!} author={e.author!} postedAt={e.postedAt!} mode={isAuth ? userToken?.username! === user?.username : false} reply={e.replys?.length} />
         ))}
-        <button onClick={() => load()}>load</button>
+        {/* <button onClick={() => load()}>load</button> */}
       </div>
     </Layout>
   );
