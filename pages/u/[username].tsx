@@ -49,7 +49,9 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
       method: "post",
       result: ({ posts: newPost }) => {
         setPosts([...posts, ...newPost]);
-        setStart(start + limit);
+        if (start <= user?.numberOfPosts! - limit) {
+          setStart(start + limit);
+        }
         /**
          * 1=> 0 2
          * 2=> 2 2
