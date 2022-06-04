@@ -59,17 +59,15 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
     req(param);
   }
 
-  useEffect(() => {
-    window.addEventListener("scroll", () => {
-      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-      const scrolled = window.scrollY;
-      if (Math.ceil(scrolled) === scrollable) {
-        if (user?.numberOfPosts! > limit) {
-          load();
-        }
+  window.addEventListener("scroll", () => {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const scrolled = window.scrollY;
+    if (Math.ceil(scrolled) === scrollable) {
+      if (user?.numberOfPosts! > limit) {
+        load();
       }
-    });
-  }, []);
+    }
+  });
 
   return (
     <Layout title={user?.username} description={`profile ${user?.username}`} isAuth={isAuth} username={userToken?.username}>
