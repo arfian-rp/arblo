@@ -65,7 +65,7 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
     const scrollable = document.documentElement.scrollHeight - window.innerHeight;
     const scrolled = window.scrollY;
     if (Math.ceil(scrolled) === scrollable) {
-      if (user?.numberOfPosts! > limit && user?.numberOfPosts !== posts.length) {
+      if (user?.numberOfPosts! > limit && user?.numberOfPosts! > posts.length) {
         load();
       }
     }
@@ -126,7 +126,10 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
             <Post key={e._id} _id={e._id!} title={e.title!} body={e.body!} author={e.author!} postedAt={e.postedAt!} mode={isAuth ? userToken?.username! === user?.username : false} reply={e.replys?.length} />
           </>
         ))}
-        {/* <button onClick={() => load()}>load</button> */}
+        <div>
+          <br />
+          <div className="text-center text-3xl">Loading...</div>
+        </div>
       </div>
     </Layout>
   );
