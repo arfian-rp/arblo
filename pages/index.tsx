@@ -18,7 +18,7 @@ interface Props {
 }
 export default function Home({ isAuth, userToken, count, posts: initialPost }: Props) {
   const [posts, setPosts] = useState(initialPost);
-  const [start, setStart] = useState(10);
+  const [start, setStart] = useState(limit);
 
   function load() {
     const param: ReqParamInterface = {
@@ -36,24 +36,19 @@ export default function Home({ isAuth, userToken, count, posts: initialPost }: P
     req(param);
   }
 
-  useEffect(() => {
-    window.addEventListener("scroll", () => {
-      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-      const scrolled = window.scrollY;
-      if (Math.ceil(scrolled) === scrollable) {
-        if (count > limit) {
-          load();
-        }
-      }
-    });
-  }, []);
-
   return (
     <Layout title="Arblo" isAuth={isAuth} username={userToken?.username}>
-      <div className="my-10">
+      <div className="py-10">
         {posts.map((e: PostInterface) => (
           <Post key={e._id} _id={e._id!} title={e.title!} body={e.body!} author={e.author!} postedAt={e.postedAt!} mode={userToken?.username! === e.author} reply={e.replys?.length} />
         ))}
+        {posts.length < count && (
+          <div className="flex justify-center py-12">
+            <button onClick={() => load()} className="btn text-lg">
+              Load More
+            </button>
+          </div>
+        )}
       </div>
     </Layout>
   );

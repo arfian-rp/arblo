@@ -13,7 +13,7 @@ import connectDb from "../../utils/connectDb";
 import req, { ReqParamInterface } from "../../utils/req";
 import verifyToken from "../../utils/verifyToken";
 
-const limit = 2;
+const limit = 10;
 
 interface Props {
   isAuth: boolean;
@@ -103,7 +103,7 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
         </div>
       </div>
 
-      <div className="my-10">
+      <div className="py-10">
         {posts.map((e: PostInterface) => (
           <Post key={e._id} _id={e._id!} title={e.title!} body={e.body!} author={e.author!} postedAt={e.postedAt!} mode={isAuth ? userToken?.username! === user?.username : false} reply={e.replys?.length} />
         ))}
