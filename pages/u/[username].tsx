@@ -65,7 +65,7 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
     const scrollable = document.documentElement.scrollHeight - window.innerHeight;
     const scrolled = window.scrollY;
     if (Math.ceil(scrolled) === scrollable) {
-      if (user?.numberOfPosts! > limit) {
+      if (user?.numberOfPosts! > limit && user?.numberOfPosts !== posts.length) {
         load();
       }
     }
