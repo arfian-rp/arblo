@@ -49,23 +49,19 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
       method: "post",
       result: ({ posts: newPost }) => {
         setPosts([...posts, ...newPost]);
-        if (start <= user?.numberOfPosts! - limit) {
-          setStart(start + limit);
-        }
-        /**
-         * 1=> 0 2
-         * 2=> 2 2
-         */
+        setStart(start + limit);
       },
     };
-    req(param);
+    if (posts.length < user?.numberOfPosts!) {
+      req(param);
+    }
   }
 
   window.addEventListener("scroll", () => {
     const scrollable = document.documentElement.scrollHeight - window.innerHeight;
     const scrolled = window.scrollY;
     if (Math.ceil(scrolled) === scrollable) {
-      if (user?.numberOfPosts! > limit && user?.numberOfPosts! > posts.length) {
+      if (user?.numberOfPosts! > limit) {
         load();
       }
     }
@@ -126,10 +122,13 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
             <Post key={e._id} _id={e._id!} title={e.title!} body={e.body!} author={e.author!} postedAt={e.postedAt!} mode={isAuth ? userToken?.username! === user?.username : false} reply={e.replys?.length} />
           </>
         ))}
-        <div>
-          <br />
-          <div className="text-center text-3xl">Loading...</div>
-        </div>
+        {user?.numberOfPosts! > limit && (
+          <div>
+            <br />
+            <div className="text-center text-3xl">Loading...</div>
+          </div>
+        )}
+        <br />
       </div>
     </Layout>
   );
