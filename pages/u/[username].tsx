@@ -24,7 +24,7 @@ interface Props {
 export default function Profile({ isAuth, userToken, user, posts: initialPosts }: Props) {
   const router = useRouter();
   const [posts, setPosts] = useState(initialPosts);
-  const [start, setStart] = useState(10);
+  const [start, setStart] = useState(2);
 
   function logout() {
     const param: ReqParamInterface = {
