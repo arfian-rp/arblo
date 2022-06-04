@@ -52,16 +52,14 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
         setStart(start + limit);
       },
     };
-    if (posts.length < user?.numberOfPosts!) {
-      req(param);
-    }
+    req(param);
   }
 
   window.addEventListener("scroll", () => {
-    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-    const scrolled = window.scrollY;
-    if (Math.ceil(scrolled) === scrollable) {
-      if (posts.length < user?.numberOfPosts!) {
+    if (posts.length < user?.numberOfPosts!) {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      if (Math.ceil(scrolled) === scrollable) {
         load();
       }
     }
