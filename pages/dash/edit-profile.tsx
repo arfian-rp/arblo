@@ -55,10 +55,10 @@ export default function Edit({ user }: Props) {
         <form onSubmit={edit} className="flex flex-col gap-2 p-5 md:w-[33vw] border-2 border-primary mx-auto mt-[50vh] -translate-y-[75%] rounded-md">
           <div className="text-center text-3xl">Edit Profile</div>
           <div className="text-center">{msg}</div>
-          <div className="flex items-center justify-between">
+          {/* <div className="flex items-center justify-between">
             <label htmlFor="username">Username:</label>
             <input value={username} onChange={(e) => setUsername(e.target.value.toLowerCase())} className="input w-[10rem]" type="text" id="username" placeholder="lowercase" autoFocus />
-          </div>
+          </div> */}
           <div className="flex items-center justify-between">
             <label htmlFor="email">Email:</label>
             <input value={email} onChange={(e) => setEmail(e.target.value.toLowerCase())} className="input w-[10rem]" type="email" id="email" placeholder="lowercase" />
