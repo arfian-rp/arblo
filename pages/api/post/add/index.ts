@@ -32,20 +32,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               return resUtilError(res);
             }
             res.status(200).json(fields);
-            cloudinary.uploader
-              .upload(files.file.path, { width: 600 }, (err: any, res2: any) => {
-                if (err) {
-                  return resUtilError(res);
-                }
-                new PostModel({
-                  title: fields.title,
-                  body: fields.body,
-                  image: res2.public_id,
-                  author: token.username,
-                }).save();
+            cloudinary.uploader.upload(files.file.path, { width: 600 }, (err: any, res2: any) => {
+              if (err) {
+                return resUtilError(res);
+              }
+              new PostModel({
+                title: fields.title,
+                body: fields.body,
+                image: res2.public_id,
+                author: token.username,
               })
-              .then(() => resUtilSuccess(res))
-              .catch(() => resUtilError(res));
+                .save()
+                .then(() => resUtilSuccess(res))
+                .catch(() => resUtilError(res));
+            });
           });
         })
         .catch(() => resUtilError(res));
