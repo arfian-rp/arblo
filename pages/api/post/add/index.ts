@@ -29,6 +29,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         if (err) {
           return resUtilError(res);
         }
+
         cloudinary.uploader.upload(files.file.filepath, { width: 600 }, (err: any, res2: any) => {
           new PostModel({
             title: fields.title,
