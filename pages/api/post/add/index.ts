@@ -1,11 +1,11 @@
 import formidable from "formidable";
 import { NextApiRequest, NextApiResponse } from "next";
-import PostModel from "../../../../model/PostModel";
 import UserModel from "../../../../model/UserModel";
 import connectDb from "../../../../utils/connectDb";
 import { resUtilError, resUtilSuccess } from "../../../../utils/resUtil";
 import verifyToken from "../../../../utils/verifyToken";
 import { v2 as cloudinary } from "cloudinary";
+import PostModel from "../../../../model/PostModel";
 
 export const config = {
   api: {
@@ -25,15 +25,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       connectDb();
       const { token } = await verifyToken(req.cookies.refreshToken, false);
       const form = formidable({ keepExtensions: true });
-      form.parse(req, (err, fields: any, files: any) => {
+      form.parse(req, (err, fields, files: any) => {
         if (err) {
           return resUtilError(res);
         }
-        res.status(200).json(fields);
         cloudinary.uploader.upload(files.file.filepath, { width: 600 }, (err: any, res2: any) => {
-          if (err) {
-            return resUtilError(res);
-          }
           new PostModel({
             title: fields.title,
             body: fields.body,
