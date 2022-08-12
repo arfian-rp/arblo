@@ -26,11 +26,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const { token } = await verifyToken(req.cookies.refreshToken, false);
       UserModel.updateOne({ username: token.username }, { $inc: { numberOfPosts: 1 } })
         .then(() => {
-          const form = formidable({ multiples: true, keepExtensions: true });
+          const form = formidable({ keepExtensions: true });
           form.parse(req, (err, fields: any, files: any) => {
+            if (err) {
+              return resUtilError(res);
+            }
             res.status(200).json(fields);
             cloudinary.uploader
               .upload(files.file.path, { width: 600 }, (err: any, res2: any) => {
+                if (err) {
+                  return resUtilError(res);
+                }
                 new PostModel({
                   title: fields.title,
                   body: fields.body,
