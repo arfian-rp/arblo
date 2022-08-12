@@ -12,8 +12,9 @@ interface Props {
 }
 export default function Edit({ user }: Props) {
   const [msg, setMsg] = useState("");
-  const [username, setUsername] = useState(user.username);
+  const [username] = useState(user.username);
   const [email, setEmail] = useState(user.email);
+  const [web, setWeb] = useState(user.web);
   const [bio, setBio] = useState(user.bio);
 
   async function edit(e: FormEvent<HTMLFormElement>) {
@@ -24,6 +25,7 @@ export default function Edit({ user }: Props) {
       data: {
         username,
         email,
+        web,
         bio,
       },
       loading: () => setMsg("Loading..."),
@@ -58,6 +60,9 @@ export default function Edit({ user }: Props) {
           <div className="text-center text-xl cursor-pointer">{msg}</div>
           <div className="flex justify-center">
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value.toLowerCase())} placeholder="email" />
+          </div>
+          <div className="flex justify-center">
+            <input type="text" value={web} onChange={(e) => setWeb(e.target.value.toLowerCase())} placeholder="web" />
           </div>
           <div className="flex justify-center">
             <textarea value={bio} onChange={(e) => setBio(e.target.value)} />

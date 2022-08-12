@@ -7,7 +7,7 @@ import verifyToken from "../../../utils/verifyToken";
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
     connectDb();
-    const { username, email, bio } = req.body;
+    const { username, email, web, bio } = req.body;
     try {
       const { token } = await verifyToken(req.cookies.refreshToken, false);
       if (token) {
@@ -16,6 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           {
             username,
             email,
+            web,
             bio,
             updatedAt: new Date().getTime(),
           }

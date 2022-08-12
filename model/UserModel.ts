@@ -4,6 +4,7 @@ export interface UserInterface {
   _id?: string;
   username?: string;
   email?: string;
+  web?: string;
   bio?: string;
   numberOfPosts?: number;
   refreshToken?: string;
@@ -24,6 +25,9 @@ const UserSchema = new Schema<UserInterface>({
     type: String,
     required: true,
     unique: true,
+  },
+  web: {
+    type: String,
   },
   bio: {
     type: String,

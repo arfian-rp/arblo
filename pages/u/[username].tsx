@@ -92,6 +92,15 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
             <div className="m-1">Created date: {new Date(user?.createdAt!).toLocaleDateString()}</div>
           </div>
         </div>
+        {user?.web ? (
+          <div>
+            <a className="link" href={user?.web!}>
+              {user?.web}
+            </a>
+          </div>
+        ) : (
+          <></>
+        )}
         <div style={{ whiteSpace: "pre-line" }} className="text-lg my-5 md:w-[45vw]">
           {user?.bio}
         </div>
