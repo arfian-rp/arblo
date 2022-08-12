@@ -44,10 +44,10 @@ export default function Post({ user }: Props) {
           <div className="text-center text-4xl cursor-pointer">Create Post</div>
           <div className="text-center text-xl cursor-pointer">{msg}</div>
           <div className="flex justify-center">
-            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="title" name="title" />
+            <input type="file" onChange={(e) => setFile(e.target.files![0])} accept="image/*" name="file" />
           </div>
           <div className="flex justify-center">
-            <input type="file" onChange={(e) => setFile(e.target.files![0])} accept="image/*" name="file" />
+            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="title" name="title" />
           </div>
           <div className="flex justify-center">
             <textarea value={body} onChange={(e) => setBody(e.target.value)} placeholder="body" />
