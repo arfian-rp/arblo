@@ -2,7 +2,6 @@ import React from "react";
 import req, { ReqParamInterface } from "../utils/req";
 import { GoComment } from "react-icons/go";
 import { useRouter } from "next/router";
-import Image from "next/image";
 
 interface Props {
   _id: string;
@@ -46,7 +45,7 @@ export default function PostComp({ _id, title, body, author, postedAt, mode = fa
         </div>
         {image ? (
           <div className="mx-auto">
-            <Image className="border-2 border-black w-[384px] md:w-[600px]" src={`https://res.cloudinary.com/arblo/image/upload/c_fill,w_600/${image}`} width={600} alt={title} />
+            <img className="border-2 border-black w-[384px] md:w-[600px]" src={`https://res.cloudinary.com/arblo/image/upload/c_fill,w_600/${image}`} alt={title} />
           </div>
         ) : (
           <></>
