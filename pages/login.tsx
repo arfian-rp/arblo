@@ -36,7 +36,7 @@ export default function Login() {
           <div className="text-center text-4xl cursor-pointer">Login Form</div>
           <div className="text-center text-xl cursor-pointer">{msg}</div>
           <div className="flex justify-center">
-            <input type="text" value={usernameOrEmail} onChange={(e) => setUsernameOrEmail(e.target.value.toLowerCase())} placeholder="email" />
+            <input type="text" value={usernameOrEmail} onChange={(e) => setUsernameOrEmail(e.target.value.toLowerCase())} placeholder="email/username" />
           </div>
           <div className="flex justify-center">
             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="password" />
