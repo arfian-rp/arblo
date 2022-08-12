@@ -4,20 +4,14 @@ import UserModel from "../../../../model/UserModel";
 import connectDb from "../../../../utils/connectDb";
 import { resUtilError, resUtilSuccess } from "../../../../utils/resUtil";
 import verifyToken from "../../../../utils/verifyToken";
-import { v2 as cloudinary } from "cloudinary";
 import PostModel from "../../../../model/PostModel";
+import cloudinary from "../../../../utils/cloudinary";
 
 export const config = {
   api: {
     bodyParser: false,
   },
 };
-
-cloudinary.config({
-  cloud_name: String(process.env.CLOUD_NAME!),
-  api_key: String(process.env.API_KEY!),
-  api_secret: String(process.env.API_SECRET!),
-});
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {

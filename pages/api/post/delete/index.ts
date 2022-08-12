@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import PostModel from "../../../../model/PostModel";
 import UserModel from "../../../../model/UserModel";
+import cloudinary from "../../../../utils/cloudinary";
 import connectDb from "../../../../utils/connectDb";
 import { resUtilError, resUtilSuccess } from "../../../../utils/resUtil";
 import verifyToken from "../../../../utils/verifyToken";
@@ -8,13 +9,14 @@ import verifyToken from "../../../../utils/verifyToken";
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "DELETE") {
     connectDb();
-    const { _id } = req.body;
+    const { _id, image } = req.body;
     try {
       const { token } = await verifyToken(req.cookies.refreshToken, false);
-      UserModel.updateOne({ username: token.username }, { $inc: { numberOfPosts: -1 } })
+      PostModel.deleteOne({ _id })
         .then(() => {
-          PostModel.deleteOne({ _id })
+          UserModel.updateOne({ username: token.username }, { $inc: { numberOfPosts: -1 } })
             .then(() => {
+              cloudinary.uploader.destroy(image, {}, () => resUtilSuccess(res));
               resUtilSuccess(res);
             })
             .catch(() => resUtilError(res));

@@ -20,7 +20,7 @@ export default function PostComp({ _id, title, body, author, postedAt, mode = fa
     const param: ReqParamInterface = {
       url: "/api/post/delete",
       method: "delete",
-      data: { _id },
+      data: { _id, image },
       result: () => (window.location.pathname = `/u/${author}`),
     };
     if (confirm(`delete post: '${title}'?`)) {
@@ -56,9 +56,9 @@ export default function PostComp({ _id, title, body, author, postedAt, mode = fa
         {body}
       </div>
       <div className="flex justify-between my-1 px-2">
-        <button onClick={() => router.push(`/p/${_id}`)} className="flex gap-2 items-center">
+        <div onClick={() => router.push(`/p/${_id}`)} className="flex gap-2 items-center">
           <GoComment className="text-2xl my-3" />: {reply}
-        </button>
+        </div>
         <div className="flex gap-2 items-center cursor-pointer">
           <div>{new Date(postedAt).toLocaleDateString()}</div>
         </div>
