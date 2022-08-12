@@ -50,7 +50,7 @@ export default function Post({ user }: Props) {
             <input type="file" onChange={(e) => setFile(e.target.files![0])} accept="image/*" name="file" />
           </div>
           <div className="flex justify-center">
-            <textarea name="body" placeholder="body" />
+            <textarea value={body} onChange={(e) => setBody(e.target.value)} placeholder="body" />
           </div>
           <div className="flex justify-center">
             <Link href={"/"}>
