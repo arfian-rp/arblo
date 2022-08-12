@@ -14,7 +14,7 @@ interface Props {
   reply?: number;
   image?: string;
 }
-export default function PostComp({ _id, title, body, author, postedAt, mode = false, reply, image = "" }: Props) {
+export default function PostComp({ _id, title, body, author, postedAt, mode = false, reply, image }: Props) {
   const router = useRouter();
 
   function del() {
@@ -46,7 +46,7 @@ export default function PostComp({ _id, title, body, author, postedAt, mode = fa
         </div>
         {image ? (
           <div className="mx-auto">
-            <Image className="border-2 border-black w-[384px] md:w-[600px]" src={`https://res.cloudinary.com/${process.env.CLOUD_NAME!}/image/upload/c_fill,w_600/${image}`} width={600} alt={title} />
+            <Image className="border-2 border-black w-[384px] md:w-[600px]" src={`https://res.cloudinary.com/arblo/image/upload/c_fill,w_600/${image}`} width={600} alt={title} />
           </div>
         ) : (
           <></>
