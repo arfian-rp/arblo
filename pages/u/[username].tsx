@@ -57,13 +57,11 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
 
   return (
     <Layout title={user?.username} description={`profile ${user?.username}`} isAuth={isAuth} username={userToken?.username}>
-      <div className="relative flex flex-col px-5 mx-5 md:mx-24 lg:mx-[30vw] border-2 border-b-primary font-semibold">
+      <div className="relative flex flex-col px-5 mx-5 md:mx-24 lg:mx-[30vw] border-2 border-b-primary font-semibold rounded-lg">
         <div>
           <div>
             <div className="text-3xl px-3 flex justify-between w-full">
-              <div className="flex items-center gap-5">
-                <RiAccountCircleLine /> {user?.username!}
-              </div>
+              <div className="flex items-center gap-5">{user?.username!}</div>
               <div className="flex items-center gap-5 group px-5">
                 <div className="flex flex-col items-center text-lg">
                   <div className="text-2xl">{user?.numberOfPosts}</div>
