@@ -50,11 +50,15 @@ export default function PostComp({ _id, title, body, author, postedAt, mode = fa
         ) : (
           <></>
         )}
-        <div className="text-center text-2xl border-2 font-semibold">{title}</div>
+        {title ? <div className="text-center text-2xl border-2 font-semibold">{title}</div> : <></>}
       </div>
-      <div style={{ whiteSpace: "pre-line" }} className="p-4">
-        {body}
-      </div>
+      {body ? (
+        <div style={{ whiteSpace: "pre-line" }} className="p-4">
+          {body}
+        </div>
+      ) : (
+        <></>
+      )}
       <div className="flex justify-between my-1 px-2">
         <div onClick={() => router.push(`/p/${_id}`)} className="flex gap-2 items-center cursor-pointer">
           <GoComment className="text-2xl my-3" />: {reply}

@@ -20,8 +20,8 @@ export default function Post({ user }: Props) {
     e.preventDefault();
     const formData = new FormData();
     formData.append("file", file!);
-    formData.append("title", title);
-    formData.append("body", body);
+    formData.append("title", title || "");
+    formData.append("body", body || "");
     const param: ReqParamInterface = {
       url: "/api/post/add",
       method: "post",
