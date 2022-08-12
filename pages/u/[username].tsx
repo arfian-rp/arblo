@@ -57,7 +57,7 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
 
   return (
     <Layout title={user?.username} description={`profile ${user?.username}`} isAuth={isAuth} username={userToken?.username}>
-      <div className="relative flex flex-col px-5 mx-5 md:mx-24 lg:mx-[30vw] border-2 border-b-primary font-semibold rounded-lg hover:border-b-black">
+      <div className="relative flex flex-col px-5 mx-5 md:mx-24 lg:mx-[30vw] border-2 border-primary font-semibold rounded-lg hover:border-black">
         <div>
           <div>
             <div className="text-3xl px-3 flex justify-between w-full">

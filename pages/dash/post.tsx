@@ -16,38 +16,38 @@ export default function Post({ user }: Props) {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
-  // function post(e: FormEvent<HTMLFormElement>) {
-  //   e.preventDefault();
-  //   const formData = new FormData();
-  //   formData.append("file", file!);
-  //   formData.append("title", title);
-  //   formData.append("body", body);
-  //   const param: ReqParamInterface = {
-  //     url: "/api/post/add",
-  //     method: "post",
-  //     data: formData,
-  //     loading: () => setMsg("Loading..."),
-  //     result: () => {
-  //       setMsg("Success..");
-  //       setTimeout(() => {
-  //         window.location.pathname = "/";
-  //       }, 55);
-  //     },
-  //     error: () => setMsg("Error"),
-  //   };
-  //   req(param);
-  // }
+  function post(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("file", file!);
+    formData.append("title", title);
+    formData.append("body", body);
+    const param: ReqParamInterface = {
+      url: "/api/post/add",
+      method: "post",
+      data: formData,
+      loading: () => setMsg("Loading..."),
+      result: () => {
+        setMsg("Success..");
+        setTimeout(() => {
+          window.location.pathname = "/";
+        }, 55);
+      },
+      error: () => setMsg("Error"),
+    };
+    req(param);
+  }
   return (
     <Layout title="Post" description="create new post" isAuth={true} username={user.username}>
       <div>
-        <form className="border-2 border-black m-auto mt-16 flex flex-col gap-3 py-10 rounded-lg w-[384px] md:w-[600px]" method="post" action="/api/post/add" encType="multipart/form-data">
+        <form className="border-2 border-black m-auto mt-16 flex flex-col gap-3 py-10 rounded-lg w-[384px] md:w-[600px]">
           <div className="text-center text-4xl cursor-pointer">Create Post</div>
           <div className="text-center text-xl cursor-pointer">{msg}</div>
           <div className="flex justify-center">
-            <input type="text" name="title" placeholder="title" />
+            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="title" />
           </div>
           <div className="flex justify-center">
-            <input type="file" accept="image/*" name="file" />
+            <input type="file" onChange={(e) => setFile(e.target.files![0])} accept="image/*" name="file" />
           </div>
           <div className="flex justify-center">
             <textarea name="body" placeholder="body" />
