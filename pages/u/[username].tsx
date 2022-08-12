@@ -1,10 +1,9 @@
 import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { BiLogOut } from "react-icons/bi";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { MdOutlineModeEdit } from "react-icons/md";
-import { RiAccountCircleLine } from "react-icons/ri";
 import Layout from "../../components/Layout";
 import PostComp from "../../components/PostComp";
 import PostModel, { PostInterface } from "../../model/PostModel";
@@ -95,7 +94,7 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
         {user?.web ? (
           <div>
             <a className="link" href={user?.web!}>
-              {user?.web}
+              {new URL(user.web).hostname}
             </a>
           </div>
         ) : (
