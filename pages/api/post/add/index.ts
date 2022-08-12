@@ -24,14 +24,28 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           return resUtilError(res);
         }
 
-        cloudinary.uploader.upload(files.file.filepath, { width: 600 }, (err: any, res2: any) => {
-          if (err) {
-            return console.info(err);
-          }
+        if (files.file) {
+          cloudinary.uploader.upload(files.file.filepath, { width: 600 }, (err: any, res2: any) => {
+            if (err) {
+              return console.info(err);
+            }
+            new PostModel({
+              title: fields.title,
+              body: fields.body,
+              image: res2.public_id,
+              author: token.username,
+            })
+              .save()
+              .then(() => {
+                UserModel.updateOne({ username: token.username }, { $inc: { numberOfPosts: 1 } }).then(() => resUtilSuccess(res));
+              })
+              .catch(() => resUtilError(res));
+          });
+        } else {
           new PostModel({
             title: fields.title,
             body: fields.body,
-            image: String(res2.public_id),
+            image: "",
             author: token.username,
           })
             .save()
@@ -39,7 +53,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               UserModel.updateOne({ username: token.username }, { $inc: { numberOfPosts: 1 } }).then(() => resUtilSuccess(res));
             })
             .catch(() => resUtilError(res));
-        });
+        }
       });
     } catch (error) {
       resUtilError(res, { error });
