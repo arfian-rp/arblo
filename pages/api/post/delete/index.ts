@@ -16,8 +16,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         .then(() => {
           UserModel.updateOne({ username: token.username }, { $inc: { numberOfPosts: -1 } })
             .then(() => {
-              cloudinary.uploader.destroy(image, {}, () => resUtilSuccess(res));
-              resUtilSuccess(res);
+              if (image) {
+                cloudinary.uploader.destroy(image, {}, () => resUtilSuccess(res));
+              } else resUtilSuccess(res);
             })
             .catch(() => resUtilError(res));
         })

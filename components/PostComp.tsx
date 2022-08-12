@@ -29,7 +29,7 @@ export default function PostComp({ _id, title, body, author, postedAt, mode = fa
   }
 
   return (
-    <div className="border-2 border-black text-lg mx-auto rounded-lg my-1 w-[384px] md:w-[600px]">
+    <div className="text-lg mx-auto rounded-lg my-1 w-[384px] md:w-[600px] border-2 border-b-primary">
       <div className="text-center text-2xl">
         <div className="text-left p-3 flex justify-between">
           <div onClick={() => router.push(`/u/${author}`)} className="flex items-center gap-3 hover:text-secondary cursor-pointer">
