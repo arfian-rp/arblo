@@ -6,7 +6,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { RiAccountCircleLine } from "react-icons/ri";
 import Layout from "../../components/Layout";
-import Post from "../../components/Post";
+import PostComp from "../../components/PostComp";
 import PostModel, { PostInterface } from "../../model/PostModel";
 import UserModel, { UserInterface } from "../../model/UserModel";
 import connectDb from "../../utils/connectDb";
@@ -101,7 +101,7 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
 
       <div className="py-10">
         {posts.map((e: PostInterface) => (
-          <Post key={e._id} _id={e._id!} image={e.image!} title={e.title!} body={e.body!} author={e.author!} postedAt={e.postedAt!} mode={isAuth ? userToken?.username! === user?.username : false} reply={e.replys?.length} />
+          <PostComp key={e._id} _id={e._id!} image={e.image!} title={e.title!} body={e.body!} author={e.author!} postedAt={e.postedAt!} mode={isAuth ? userToken?.username! === user?.username : false} reply={e.replys?.length} />
         ))}
         {posts.length < user?.numberOfPosts! && (
           <div className="flex justify-center py-12">

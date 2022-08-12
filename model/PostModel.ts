@@ -13,6 +13,8 @@ export interface PostInterface {
 const PostSchema = new Schema<PostInterface>({
   image: {
     type: String,
+    required: true,
+    default: "",
   },
   title: {
     type: String,

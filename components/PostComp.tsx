@@ -14,7 +14,7 @@ interface Props {
   reply?: number;
   image?: string;
 }
-export default function Post({ _id, title, body, author, postedAt, mode = false, reply, image = "" }: Props) {
+export default function PostComp({ _id, title, body, author, postedAt, mode = false, reply, image = "" }: Props) {
   const router = useRouter();
 
   function del() {

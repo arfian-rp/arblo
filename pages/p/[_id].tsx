@@ -1,7 +1,7 @@
 import { GetServerSidePropsContext } from "next";
 import React, { FormEvent, useState } from "react";
 import Layout from "../../components/Layout";
-import Post from "../../components/Post";
+import PostComp from "../../components/PostComp";
 import Reply from "../../components/Reply";
 import PostModel, { PostInterface } from "../../model/PostModel";
 import { UserInterface } from "../../model/UserModel";
@@ -41,7 +41,7 @@ export default function PostDetile({ post, isAuth, userToken }: Props) {
 
   return (
     <Layout title={post.title} description={`post: ${post.title}`} isAuth={isAuth} username={userToken?.username}>
-      <Post _id={post._id!} title={post.title!} body={post.body!} author={post.author!} postedAt={post.postedAt!} reply={post.replys?.length!} mode={isAuth ? userToken?.username! === post?.author! : false} />
+      <PostComp _id={post._id!} image={post.image!} title={post.title!} body={post.body!} author={post.author!} postedAt={post.postedAt!} reply={post.replys?.length!} mode={isAuth ? userToken?.username! === post?.author! : false} />
       <div className="my-10">
         {post.replys?.map((e, i) => (
           <Reply reply={e} key={i} _idPost={post._id!} mode={isAuth ? userToken?.username! === JSON.parse(JSON.stringify(e))?.author! : false} />

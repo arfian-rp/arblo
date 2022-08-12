@@ -1,7 +1,7 @@
 import { GetServerSidePropsContext } from "next";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import Layout from "../components/Layout";
-import Post from "../components/Post";
+import PostComp from "../components/PostComp";
 import PostModel, { PostInterface } from "../model/PostModel";
 import connectDb from "../utils/connectDb";
 import req, { ReqParamInterface } from "../utils/req";
@@ -40,7 +40,7 @@ export default function Home({ isAuth, userToken, count, posts: initialPost }: P
     <Layout title="Arblo" isAuth={isAuth} username={userToken?.username}>
       <div className="py-10">
         {posts.map((e: PostInterface) => (
-          <Post key={e._id} _id={e._id!} image={e.image!} title={e.title!} body={e.body!} author={e.author!} postedAt={e.postedAt!} mode={userToken?.username! === e.author} reply={e.replys?.length} />
+          <PostComp key={e._id} _id={e._id!} image={e.image!} title={e.title!} body={e.body!} author={e.author!} postedAt={e.postedAt!} mode={userToken?.username! === e.author} reply={e.replys?.length} />
         ))}
         {posts.length < count && (
           <div className="flex justify-center py-12">
