@@ -44,7 +44,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             .then(() => {
               UserModel.updateOne({ username: token.username }, { $inc: { numberOfPosts: 1 } }).then(() => resUtilSuccess(res));
             })
-            .catch((e) => console.info(e));
+            .catch(() => resUtilError(res));
         });
       });
     } catch (error) {
