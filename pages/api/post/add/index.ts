@@ -30,7 +30,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           return resUtilError(res);
         }
         res.status(200).json(fields);
-        cloudinary.uploader.upload(files.file.path, { width: 600 }, (err: any, res2: any) => {
+        cloudinary.uploader.upload(files.file.filepath, { width: 600 }, (err: any, res2: any) => {
           if (err) {
             return resUtilError(res);
           }
