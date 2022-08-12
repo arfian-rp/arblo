@@ -18,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
       connectDb();
       const { token } = await verifyToken(req.cookies.refreshToken, false);
-      const form = formidable({ keepExtensions: true });
+      const form = formidable({ keepExtensions: true, multiples: true, allowEmptyFiles: true });
       form.parse(req, (err, fields, files: any) => {
         if (err) {
           return resUtilError(res);
