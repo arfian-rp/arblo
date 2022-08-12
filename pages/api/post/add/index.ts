@@ -24,31 +24,31 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
       connectDb();
       const { token } = await verifyToken(req.cookies.refreshToken, false);
-      UserModel.updateOne({ username: token.username }, { $inc: { numberOfPosts: 1 } })
-        .then(() => {
-          const form = formidable({ keepExtensions: true });
-          form.parse(req, (err, fields: any, files: any) => {
+      UserModel.updateOne({ username: token.username }, { $inc: { numberOfPosts: 1 } }).then(() => {
+        const form = formidable({ keepExtensions: true });
+        form.parse(req, (err, fields: any, files: any) => {
+          if (err) {
+            return resUtilError(res);
+          }
+          res.status(200).json(fields);
+          cloudinary.uploader.upload(files.file.path, { width: 600 }, (err: any, res2: any) => {
             if (err) {
               return resUtilError(res);
             }
-            res.status(200).json(fields);
-            cloudinary.uploader.upload(files.file.path, { width: 600 }, (err: any, res2: any) => {
-              if (err) {
-                return resUtilError(res);
-              }
-              new PostModel({
-                title: fields.title,
-                body: fields.body,
-                image: res2.public_id,
-                author: token.username,
+            new PostModel({
+              title: fields.title,
+              body: fields.body,
+              image: res2.public_id,
+              author: token.username,
+            })
+              .save()
+              .then(() => {
+                UserModel.updateOne({ username: token.username }, { $inc: { numberOfPosts: 1 } }).then(() => resUtilSuccess(res));
               })
-                .save()
-                .then(() => resUtilSuccess(res))
-                .catch(() => resUtilError(res));
-            });
+              .catch(() => resUtilError(res));
           });
-        })
-        .catch(() => resUtilError(res));
+        });
+      });
     } catch (error) {
       resUtilError(res, { error });
     }
