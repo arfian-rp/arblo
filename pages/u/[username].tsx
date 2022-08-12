@@ -101,7 +101,7 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
 
       <div className="py-10">
         {posts.map((e: PostInterface) => (
-          <Post key={e._id} _id={e._id!} title={e.title!} body={e.body!} author={e.author!} postedAt={e.postedAt!} mode={isAuth ? userToken?.username! === user?.username : false} reply={e.replys?.length} />
+          <Post key={e._id} _id={e._id!} image={e.image!} title={e.title!} body={e.body!} author={e.author!} postedAt={e.postedAt!} mode={isAuth ? userToken?.username! === user?.username : false} reply={e.replys?.length} />
         ))}
         {posts.length < user?.numberOfPosts! && (
           <div className="flex justify-center py-12">

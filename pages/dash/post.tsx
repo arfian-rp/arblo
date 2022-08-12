@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import { GetServerSidePropsContext } from "next";
+import Link from "next/link";
 import React, { FormEvent, useState } from "react";
 import Layout from "../../components/Layout";
 import UserModel, { UserInterface } from "../../model/UserModel";
@@ -11,18 +12,20 @@ interface Props {
 }
 export default function Post({ user }: Props) {
   const [msg, setMsg] = useState("");
+  const [file, setFile] = useState<File>();
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
   function post(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append("file", file!);
+    formData.append("title", title);
+    formData.append("body", body);
     const param: ReqParamInterface = {
       url: "/api/post/add",
       method: "post",
-      data: {
-        title,
-        body,
-      },
+      data: formData,
       loading: () => setMsg("Loading..."),
       result: () => {
         setMsg("Success..");
@@ -36,20 +39,24 @@ export default function Post({ user }: Props) {
   }
   return (
     <Layout title="Post" description="create new post" isAuth={true} username={user.username}>
-      <div className="flex justify-center mt-[50vh] -translate-y-[75%]">
-        <form onSubmit={post} className="flex flex-col gap-1 w-[70vw] md:w-[30vw]">
-          <div className="text-center text-3xl">New Post</div>
-          <div className="text-center">{msg}</div>
-          <div>
-            <input autoFocus value={title} onChange={(e) => setTitle(e.target.value)} className="input w-full text-left" type="text" placeholder="title..." />
+      <div>
+        <form onSubmit={post} className="border-2 border-black m-auto mt-16 flex flex-col gap-3 py-10 rounded-lg w-[384px] md:w-[600px]">
+          <div className="text-center text-4xl cursor-pointer">Create Post</div>
+          <div className="text-center text-xl cursor-pointer">{msg}</div>
+          <div className="flex justify-center">
+            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="title" />
           </div>
-          <div>
-            <textarea value={body} onChange={(e) => setBody(e.target.value)} className="textarea w-full h-40" placeholder="body..."></textarea>
+          <div className="flex justify-center">
+            <input type="file" accept=".jpg, .png, .jpeg" onChange={(e) => setFile(e.target.files![0])} />
           </div>
-          <div>
-            <button className="btn" type="submit">
-              Post
-            </button>
+          <div className="flex justify-center">
+            <textarea value={body} onChange={(e) => setBody(e.target.value)} placeholder="body" />
+          </div>
+          <div className="flex justify-center">
+            <Link href={"/"}>
+              <button className="hover:border-red-400 text-red-400">Cancel</button>
+            </Link>
+            <button type="submit">Post</button>
           </div>
         </form>
       </div>

@@ -1,9 +1,8 @@
 import React from "react";
 import req, { ReqParamInterface } from "../utils/req";
 import { GoComment } from "react-icons/go";
-import { RiAccountCircleLine } from "react-icons/ri";
-import { BsThreeDotsVertical } from "react-icons/bs";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 interface Props {
   _id: string;
@@ -13,8 +12,9 @@ interface Props {
   postedAt: number;
   mode?: boolean;
   reply?: number;
+  image?: string;
 }
-export default function Post({ _id, title, body, author, postedAt, mode = false, reply }: Props) {
+export default function Post({ _id, title, body, author, postedAt, mode = false, reply, image = "" }: Props) {
   const router = useRouter();
 
   function del() {
@@ -30,33 +30,30 @@ export default function Post({ _id, title, body, author, postedAt, mode = false,
   }
 
   return (
-    <div className="relative mx-5 md:mx-24 lg:mx-[30vw] my-2 border-2 border-primary hover:border-secondary text-lg">
+    <div className="border-2 border-black text-lg mx-auto rounded-lg my-1 w-[384px] md:w-[600px]">
       <div className="text-center text-2xl">
-        <div className="border-2 border-b-primary text-left p-3 flex justify-between">
+        <div className="text-left p-3 flex justify-between">
           <div onClick={() => router.push(`/u/${author}`)} className="flex items-center gap-3 hover:text-secondary cursor-pointer">
-            <RiAccountCircleLine /> {author}
+            {author}
           </div>
-          <div className="px-5 group cursor-pointer">
-            <BsThreeDotsVertical className="group-hover:hidden" />
-            <div className="hidden group-hover:block absolute right-6 top-5">
-              <div className="border-2 border-black bg-white">
-                {mode ? (
-                  <div onClick={del} className="border-2 border-black text-secondary px-5 hover:bg-primary">
-                    delete
-                  </div>
-                ) : (
-                  <></>
-                )}
-                <div onClick={() => router.push(`/p/${_id}`)} className="border-2 border-black text-secondary px-5 hover:bg-primary">
-                  reply
-                </div>
-              </div>
-            </div>
-          </div>
+          {mode ? (
+            <button onClick={del} className="text-sm text-center hover:border-red-500 text-red-500 w-16 ">
+              delete
+            </button>
+          ) : (
+            <></>
+          )}
         </div>
-        <div className="text-center text-2xl  border-2 border-b-primary font-semibold">{title}</div>
+        {image ? (
+          <div className="mx-auto">
+            <Image className="border-2 border-black w-[384px] md:w-[600px]" src={`https://res.cloudinary.com/arfian07/image/upload/c_fill,w_600/${image}`} width={600} alt={title} />
+          </div>
+        ) : (
+          <></>
+        )}
+        <div className="text-center text-2xl border-2 font-semibold">{title}</div>
       </div>
-      <div style={{ whiteSpace: "pre-line" }} className="p-4 border-2 border-b-primary">
+      <div style={{ whiteSpace: "pre-line" }} className="p-4">
         {body}
       </div>
       <div className="flex justify-between my-1 px-2">

@@ -40,7 +40,7 @@ export default function Home({ isAuth, userToken, count, posts: initialPost }: P
     <Layout title="Arblo" isAuth={isAuth} username={userToken?.username}>
       <div className="py-10">
         {posts.map((e: PostInterface) => (
-          <Post key={e._id} _id={e._id!} title={e.title!} body={e.body!} author={e.author!} postedAt={e.postedAt!} mode={userToken?.username! === e.author} reply={e.replys?.length} />
+          <Post key={e._id} _id={e._id!} image={e.image!} title={e.title!} body={e.body!} author={e.author!} postedAt={e.postedAt!} mode={userToken?.username! === e.author} reply={e.replys?.length} />
         ))}
         {posts.length < count && (
           <div className="flex justify-center py-12">

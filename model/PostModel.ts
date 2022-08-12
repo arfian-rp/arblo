@@ -2,6 +2,7 @@ import { model, Schema } from "mongoose";
 
 export interface PostInterface {
   _id?: string;
+  image?: string;
   title?: string;
   body?: string;
   author?: string;
@@ -10,6 +11,9 @@ export interface PostInterface {
 }
 
 const PostSchema = new Schema<PostInterface>({
+  image: {
+    type: String,
+  },
   title: {
     type: String,
     required: true,

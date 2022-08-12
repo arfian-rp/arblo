@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import { GetServerSidePropsContext } from "next";
+import Link from "next/link";
 import React, { FormEvent, useState } from "react";
 import Layout from "../../components/Layout";
 import UserModel, { UserInterface } from "../../model/UserModel";
@@ -51,26 +52,21 @@ export default function Edit({ user }: Props) {
 
   return (
     <Layout title="Edit Profile" description="edit profile" isAuth={true} username={user.username}>
-      <div className="mx-10">
-        <form onSubmit={edit} className="flex flex-col gap-2 p-5 md:w-[33vw] border-2 border-primary mx-auto mt-[50vh] -translate-y-[75%] rounded-md">
-          <div className="text-center text-3xl">Edit Profile</div>
-          <div className="text-center">{msg}</div>
-          {/* <div className="flex items-center justify-between">
-            <label htmlFor="username">Username:</label>
-            <input value={username} onChange={(e) => setUsername(e.target.value.toLowerCase())} className="input w-[10rem]" type="text" id="username" placeholder="lowercase" autoFocus />
-          </div> */}
-          <div className="flex items-center justify-between">
-            <label htmlFor="email">Email:</label>
-            <input value={email} onChange={(e) => setEmail(e.target.value.toLowerCase())} className="input w-[10rem]" type="email" id="email" placeholder="lowercase" />
+      <div>
+        <form onSubmit={edit} className="border-2 border-black m-auto mt-16 flex flex-col gap-3 py-10 rounded-lg w-[384px] md:w-[600px]">
+          <div className="text-center text-4xl cursor-pointer">Edit Profile</div>
+          <div className="text-center text-xl cursor-pointer">{msg}</div>
+          <div className="flex justify-center">
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value.toLowerCase())} placeholder="email" />
           </div>
-          <div className="flex items-center justify-between">
-            <label htmlFor="bio">Bio:</label>
-            <textarea value={bio} onChange={(e) => setBio(e.target.value)} className="textarea w-[10rem]" placeholder="max 150 characters"></textarea>
+          <div className="flex justify-center">
+            <textarea value={bio} onChange={(e) => setBio(e.target.value)} />
           </div>
-          <div>
-            <button className="btn" type="submit">
-              Edit
-            </button>
+          <div className="flex justify-center">
+            <Link href={"/"}>
+              <button className="hover:border-red-400 text-red-400">Cancel</button>
+            </Link>
+            <button type="submit">Edit</button>
           </div>
         </form>
       </div>

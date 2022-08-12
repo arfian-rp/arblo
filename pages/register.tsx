@@ -37,32 +37,26 @@ export default function Register() {
 
   return (
     <Layout title="Register" description="register page" isAuth={false}>
-      <div className="mx-10">
-        <form onSubmit={register} className="flex flex-col gap-2 p-5 md:w-[33vw] border-2 border-primary mx-auto mt-[50vh] -translate-y-[75%] rounded-md">
-          <div className="text-center text-3xl">Register</div>
-          <div className="text-center">{msg}</div>
-          <div className="flex items-center justify-between">
-            <label htmlFor="username">Username:</label>
-            <input value={username} onChange={(e) => setUsername(e.target.value.toLowerCase())} className="input" type="text" id="username" placeholder="lowercase" autoFocus />
+      <div>
+        <form onSubmit={register} className="border-2 border-black m-auto mt-16 flex flex-col gap-3 py-10 rounded-lg w-[384px] md:w-[600px]">
+          <div className="text-center text-4xl cursor-pointer">Register Form</div>
+          <div className="text-center text-xl cursor-pointer">{msg}</div>
+          <div className="flex justify-center">
+            <input type="text" value={username} onChange={(e) => setUsername(e.target.value.toLowerCase())} placeholder="username" />
           </div>
-          <div className="flex items-center justify-between">
-            <label htmlFor="email">Email:</label>
-            <input value={email} onChange={(e) => setEmail(e.target.value.toLowerCase())} className="input" type="email" id="email" placeholder="lowercase" />
+          <div className="flex justify-center">
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value.toLowerCase())} placeholder="email" />
           </div>
-          <div className="flex items-center justify-between">
-            <label htmlFor="password">Password:</label>
-            <input value={password} onChange={(e) => setPassword(e.target.value)} className="input" type="password" id="password" placeholder="min 8 characters" />
+          <div className="flex justify-center">
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="password" />
           </div>
-          <div className="flex items-center justify-between">
-            <label htmlFor="confirm">Confirm:</label>
-            <input value={confirm} onChange={(e) => setConfirm(e.target.value)} className="input" type="password" id="confirm" placeholder="repeat password" />
+          <div className="flex justify-center">
+            <input type="password" value={confirm} onChange={(e) => setConfirm(e.target.value)} placeholder="confirm password" />
           </div>
-          <div>
+          <div className="flex justify-center">
             <Link href="/login">
               <div className="link">Login?</div>
             </Link>
-          </div>
-          <div>
             <button className="btn" type="submit">
               Register
             </button>

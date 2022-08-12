@@ -31,24 +31,20 @@ export default function Login() {
 
   return (
     <Layout title="Login" description="login page" isAuth={false}>
-      <div className="mx-10">
-        <form onSubmit={login} className="flex flex-col gap-2 p-5 md:w-[33vw] border-2 border-primary mx-auto mt-[50vh] -translate-y-[75%] rounded-md">
-          <div className="text-center text-3xl">Login</div>
-          <div className="text-center">{msg}</div>
-          <div className="flex items-center justify-between">
-            <label htmlFor="username">Username:</label>
-            <input value={usernameOrEmail} onChange={(e) => setUsernameOrEmail(e.target.value.toLowerCase())} className="input" type="text" id="username" placeholder="username/email" autoFocus />
+      <div>
+        <form onSubmit={login} className="border-2 border-black m-auto mt-16 flex flex-col gap-3 py-10 rounded-lg w-[384px] md:w-[600px]">
+          <div className="text-center text-4xl cursor-pointer">Login Form</div>
+          <div className="text-center text-xl cursor-pointer">{msg}</div>
+          <div className="flex justify-center">
+            <input type="text" value={usernameOrEmail} onChange={(e) => setUsernameOrEmail(e.target.value.toLowerCase())} placeholder="email" />
           </div>
-          <div className="flex items-center justify-between">
-            <label htmlFor="password">Password:</label>
-            <input value={password} onChange={(e) => setPassword(e.target.value)} className="input" type="password" id="password" />
+          <div className="flex justify-center">
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="password" />
           </div>
-          <div>
+          <div className="flex justify-center">
             <Link href="/register">
               <div className="link">Create Account?</div>
             </Link>
-          </div>
-          <div>
             <button className="btn" type="submit">
               Login
             </button>
