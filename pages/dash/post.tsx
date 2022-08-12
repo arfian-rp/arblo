@@ -47,7 +47,7 @@ export default function Post({ user }: Props) {
             <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="title" />
           </div>
           <div className="flex justify-center">
-            <input type="file" accept=".jpg, .png, .jpeg" onChange={(e) => setFile(e.target.files![0])} />
+            <input type="file" accept="image/*" onChange={(e) => setFile(e.target.files![0])} />
           </div>
           <div className="flex justify-center">
             <textarea value={body} onChange={(e) => setBody(e.target.value)} placeholder="body" />
