@@ -45,7 +45,7 @@ export default function PostComp({ _id, title, body, author, postedAt, mode = fa
         </div>
         {image ? (
           <div className="mx-auto">
-            <img className="border-2 border-black w-[384px] md:w-[600px]" src={`https://res.cloudinary.com/arblo/image/upload/c_fill,w_600/${image}`} alt={title} />
+            <img className="border-2 hover:border-black w-[384px] md:w-[600px]" src={`https://res.cloudinary.com/arblo/image/upload/c_fill,w_600/${image}`} alt={title} />
           </div>
         ) : (
           <></>
