@@ -19,9 +19,15 @@ export default function Post({ user }: Props) {
   function post(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("file", file!);
-    formData.append("title", title);
-    formData.append("body", body);
+    if (file) {
+      formData.append("file", file);
+    }
+    if (title) {
+      formData.append("title", title);
+    }
+    if (body) {
+      formData.append("body", body);
+    }
     const param: ReqParamInterface = {
       url: "/api/post/add",
       method: "post",
