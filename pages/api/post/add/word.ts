@@ -9,6 +9,7 @@ import cloudinary from "../../../../utils/cloudinary";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
+    return res.send(JSON.stringify(req.body));
     try {
       connectDb();
       const { token } = await verifyToken(req.cookies.refreshToken, false);
