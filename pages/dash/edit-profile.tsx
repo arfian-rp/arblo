@@ -11,6 +11,7 @@ interface Props {
   user: UserInterface;
 }
 export default function Edit({ user }: Props) {
+  const [file, setFile] = useState<File>();
   const [msg, setMsg] = useState("");
   const [username] = useState(user.username);
   const [email, setEmail] = useState(user.email);
@@ -19,15 +20,27 @@ export default function Edit({ user }: Props) {
 
   async function edit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const formData = new FormData();
+    if (file) {
+      formData.append("file", file);
+    }
+    if (username) {
+      formData.append("username", username);
+    }
+    if (email) {
+      formData.append("email", email);
+    }
+    if (web) {
+      formData.append("web", web);
+    }
+    if (bio) {
+      formData.append("bio", bio);
+    }
+
     const param: ReqParamInterface = {
       url: "/api/auth/edit",
       method: "post",
-      data: {
-        username,
-        email,
-        web,
-        bio,
-      },
+      data: formData,
       loading: () => setMsg("Loading..."),
       result: () => {
         const param: ReqParamInterface = {
@@ -57,6 +70,9 @@ export default function Edit({ user }: Props) {
       <div>
         <form onSubmit={edit} className="border-2 border-black m-auto mt-16 flex flex-col gap-3 py-10 rounded-lg w-[384px] md:w-[600px]">
           <div className="text-center text-4xl cursor-pointer">Edit Profile</div>
+          <div className="flex justify-center">
+            <input type="file" onChange={(e) => setFile(e.target.files![0])} accept="image/*" name="file" />
+          </div>
           <div className="text-center text-xl cursor-pointer">{msg}</div>
           <div className="flex justify-center">
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value.toLowerCase())} placeholder="email" />
