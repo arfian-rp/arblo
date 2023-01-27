@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import req, { ReqParamInterface } from "../utils/req";
+import { useEffect, useState } from "react";
 
 interface Props {
   _idPost: string;
@@ -12,6 +13,19 @@ interface Props {
 }
 export default function Reply({ reply, _idPost, mode = false }: Props) {
   const router = useRouter();
+  const [img, setImg] = useState("");
+
+  useEffect(() => {
+    const param: ReqParamInterface = {
+      url: `/api/profile/${reply.author}`,
+      method: "get",
+      result: ({ image: img }) => {
+        setImg(img);
+      },
+    };
+    req(param);
+  }, []);
+
   function del() {
     const param: ReqParamInterface = {
       url: "/api/reply/delete",

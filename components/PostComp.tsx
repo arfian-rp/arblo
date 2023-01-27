@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import req, { ReqParamInterface } from "../utils/req";
-import { GoComment } from "react-icons/go";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { GoComment } from "react-icons/go";
+import req, { ReqParamInterface } from "../utils/req";
 
 interface Props {
   _id: string;
