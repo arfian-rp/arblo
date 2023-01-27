@@ -27,7 +27,10 @@ export default function Post({ user }: Props) {
     const param: ReqParamInterface = {
       url: "/api/post/add/word",
       method: "post",
-      data: formData,
+      data: {
+        title,
+        body,
+      },
       loading: () => setMsg("Loading..."),
       result: () => {
         setMsg("Success..");
