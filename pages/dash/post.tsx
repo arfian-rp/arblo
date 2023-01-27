@@ -46,7 +46,7 @@ export default function Post({ user }: Props) {
   return (
     <Layout title="Post" description="create new post" isAuth={true} username={user.username}>
       <div className="border-2 border-black m-auto mt-16 flex flex-col gap-3 py-10 rounded-lg w-[384px] md:w-[600px]">
-        <div className="flex flex-col">
+        <div className="flex flex-col items-center">
           <Link href={"/dash/post_photo"}>
             <button className="mx-[1rem]">post photo</button>
           </Link>
