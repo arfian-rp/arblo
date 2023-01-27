@@ -6,6 +6,12 @@ import connectDb from "../../../utils/connectDb";
 import { resUtilError, resUtilSuccess } from "../../../utils/resUtil";
 import verifyToken from "../../../utils/verifyToken";
 
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
     connectDb();
