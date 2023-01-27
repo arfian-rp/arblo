@@ -70,10 +70,10 @@ export default function Edit({ user }: Props) {
       <div>
         <form onSubmit={edit} className="border-2 border-black m-auto mt-16 flex flex-col gap-3 py-10 rounded-lg w-[384px] md:w-[600px]">
           <div className="text-center text-4xl cursor-pointer">Edit Profile</div>
+          <div className="text-center text-xl cursor-pointer">{msg}</div>
           <div className="flex justify-center">
             <input type="file" onChange={(e) => setFile(e.target.files![0])} accept="image/*" name="file" />
           </div>
-          <div className="text-center text-xl cursor-pointer">{msg}</div>
           <div className="flex justify-center">
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value.toLowerCase())} placeholder="email" />
           </div>
