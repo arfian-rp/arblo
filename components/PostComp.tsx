@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import req, { ReqParamInterface } from "../utils/req";
 import { GoComment } from "react-icons/go";
 import { useRouter } from "next/router";
@@ -15,6 +15,18 @@ interface Props {
 }
 export default function PostComp({ _id, title, body, author, postedAt, mode = false, reply, image }: Props) {
   const router = useRouter();
+  const [img, setImg] = useState("");
+
+  function load() {
+    const param: ReqParamInterface = {
+      url: `/api/profile/${author}`,
+      method: "get",
+      result: ({ image: img }) => {
+        setImg(img);
+      },
+    };
+    req(param);
+  }
 
   function del() {
     const param: ReqParamInterface = {
@@ -33,6 +45,11 @@ export default function PostComp({ _id, title, body, author, postedAt, mode = fa
       <div className="text-center text-2xl">
         <div className="text-left p-3 flex justify-between">
           <div onClick={() => router.push(`/u/${author}`)} className="flex items-center gap-3 hover:text-secondary cursor-pointer">
+            {img == "" ? (
+              <img className="border-2 hover:border-black w-[50px] h-[50px] rounded-full border-2 border-primary" src={`/anonim.png`} alt={"profile"} />
+            ) : (
+              <img className="border-2 hover:border-black w-[50px] h-[50px] rounded-full border-2 border-primary" src={`https://res.cloudinary.com/arblo/image/upload/c_fill,w_100/${img}`} alt={"profile"} />
+            )}
             {author}
           </div>
           {mode ? (

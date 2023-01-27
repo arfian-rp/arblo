@@ -16,7 +16,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.5.2",
     "next": "12.1.6",
-    "react": "18.1.0",
+    "react": "^18.3.0-next-fecc288b7-20221025",
     "react-dom": "18.1.0",
     "react-icons": "^4.3.1"
   },
