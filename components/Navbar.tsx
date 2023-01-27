@@ -27,7 +27,7 @@ export default function Navbar(props: Props) {
       </Link>
       <div className="text-3xl">
         {props.isAuth ? (
-          <div className="flex gap-10">
+          <div className="flex gap-10 items-center">
             <Link href="/dash/post">
               <BiCommentAdd className="cursor-pointer std-transition hover:text-secHov" />
             </Link>
