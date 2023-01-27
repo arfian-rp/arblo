@@ -17,7 +17,7 @@ export default function PostComp({ _id, title, body, author, postedAt, mode = fa
   const router = useRouter();
   const [img, setImg] = useState("");
 
-  function load() {
+  useEffect(() => {
     const param: ReqParamInterface = {
       url: `/api/profile/${author}`,
       method: "get",
@@ -26,7 +26,7 @@ export default function PostComp({ _id, title, body, author, postedAt, mode = fa
       },
     };
     req(param);
-  }
+  }, []);
 
   function del() {
     const param: ReqParamInterface = {
