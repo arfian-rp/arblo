@@ -59,8 +59,12 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
       <div className="relative flex flex-col px-5 mx-5 md:mx-24 lg:mx-[30vw] border-2 border-primary font-semibold rounded-lg hover:border-black">
         <div>
           <div>
-            <div className="text-3xl px-3 flex justify-between w-full">
-              <img className="border-2 hover:border-black w-[100px] h-[100px] rounded-full border-2 border-primary" src={`https://res.cloudinary.com/arblo/image/upload/c_fill,w_100/${user?.image}`} alt={"profile"} />
+            <div className="text-3xl px-3 flex justify-around gap-1 w-full">
+              {user?.image == "" ? (
+                <img className="border-2 hover:border-black w-[50px] h-[50px] rounded-full border-2 border-primary" src={`/anonim.png`} alt={"profile"} />
+              ) : (
+                <img className="border-2 hover:border-black w-[50px] h-[50px] rounded-full border-2 border-primary" src={`https://res.cloudinary.com/arblo/image/upload/c_fill,w_100/${user?.image}`} alt={"profile"} />
+              )}
               <div className="flex items-center gap-5">{user?.username!}</div>
               <div className="flex items-center gap-5 group px-5">
                 <div className="flex flex-col items-center text-lg">
