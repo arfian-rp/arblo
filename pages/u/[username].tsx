@@ -56,7 +56,7 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
 
   return (
     <Layout title={user?.username} description={`profile ${user?.username}`} isAuth={isAuth} username={userToken?.username}>
-      <div className="relative flex flex-col px-5 mx-5 md:mx-24 lg:mx-[30vw] border-2 border-primary font-semibold rounded-lg hover:border-black">
+      <div className="relative flex flex-col px-5 mx-5 md:mx-24 lg:mx-[30vw] border-2 border-primary font-semibold rounded-lg w-[350px] md:w-[600px] hover:border-black">
         <div>
           <div>
             <div className="text-3xl px-3 flex justify-around gap-1 w-full">
@@ -66,11 +66,11 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
                 ) : (
                   <img className="border-2 hover:border-black w-[50px] h-[50px] rounded-full border-2 border-primary" src={`https://res.cloudinary.com/arblo/image/upload/c_fill,w_100/${user?.image}`} alt={"profile"} />
                 )}
-                {user?.username!}
+                <div className="text-xl">{user?.username!}</div>
               </div>
               <div className="flex items-center gap-5 group px-5">
                 <div className="flex flex-col items-center text-lg">
-                  <div className="text-2xl">{user?.numberOfPosts}</div>
+                  <div className="text-xl">{user?.numberOfPosts}</div>
                   <div>Posts</div>
                 </div>
                 {userToken?.username! === user?.username ? (
