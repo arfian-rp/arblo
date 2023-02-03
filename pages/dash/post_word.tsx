@@ -45,7 +45,7 @@ export default function Post({ user }: Props) {
   return (
     <Layout title="Post" description="create new post" isAuth={true} username={user.username}>
       <div>
-        <form onSubmit={post} className="border-2 border-black m-auto mt-16 flex flex-col gap-3 py-10 rounded-lg w-[384px] md:w-[600px]">
+        <form onSubmit={post} className="border-2 border-black m-auto mt-16 flex flex-col gap-3 py-10 rounded-lg w-[350px] md:w-[600px]">
           <div className="text-center text-4xl cursor-pointer">Create Post</div>
           <div className="text-center text-xl cursor-pointer">{msg}</div>
           <div className="flex justify-center">

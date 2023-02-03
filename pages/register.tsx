@@ -38,7 +38,7 @@ export default function Register() {
   return (
     <Layout title="Register" description="register page" isAuth={false}>
       <div>
-        <form onSubmit={register} className="border-2 border-black m-auto mt-16 flex flex-col gap-3 py-10 rounded-lg w-[384px] md:w-[600px]">
+        <form onSubmit={register} className="border-2 border-black m-auto mt-16 flex flex-col gap-3 py-10 rounded-lg w-[350px] md:w-[600px]">
           <div className="text-center text-4xl cursor-pointer">Register Form</div>
           <div className="text-center text-xl cursor-pointer">{msg}</div>
           <div className="flex justify-center">
