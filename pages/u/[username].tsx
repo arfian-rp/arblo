@@ -68,7 +68,7 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
                 )}
                 <div className="text-xl">{user?.username!}</div>
               </div>
-              <div className="flex items-center gap-5 group px-5">
+              <div className="flex items-center gap-3 group px-3">
                 <div className="flex flex-col items-center text-lg">
                   <div className="text-xl">{user?.numberOfPosts}</div>
                   <div>Posts</div>
