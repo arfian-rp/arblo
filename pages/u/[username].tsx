@@ -59,7 +59,7 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
       <div className="relative flex flex-col px-5 mx-5 md:mx-24 lg:mx-[30vw] border-2 border-primary font-semibold rounded-lg w-[350px] md:w-[600px] hover:border-black">
         <div>
           <div>
-            <div className="text-3xl px-3 flex justify-around gap-1 w-full">
+            <div className="text-xl flex justify-between gap-1 w-full">
               <div className="flex items-center gap-1">
                 {user?.image == "" ? (
                   <img className="border-2 hover:border-black w-[50px] h-[50px] rounded-full border-2 border-primary" src={`/anonim.png`} alt={"profile"} />
