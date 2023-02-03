@@ -41,7 +41,7 @@ export default function PostComp({ _id, title, body, author, postedAt, mode = fa
   }
 
   return (
-    <div className="text-lg mx-auto rounded-lg my-1 w-[384px] md:w-[600px] border-2 border-primary hover:border-black">
+    <div className="text-lg mx-auto rounded-lg my-1 w-[370px] md:w-[600px] border-2 border-primary hover:border-black">
       <div className="text-center text-xl">
         <div className="text-left p-3 flex justify-between">
           <div onClick={() => router.push(`/u/${author}`)} className="flex items-center gap-3 hover:text-secondary cursor-pointer">
@@ -62,7 +62,7 @@ export default function PostComp({ _id, title, body, author, postedAt, mode = fa
         </div>
         {image ? (
           <div className="mx-auto">
-            <img className="border-2 hover:border-black w-[384px] md:w-[600px]" src={`https://res.cloudinary.com/arblo/image/upload/c_fill,w_600/${image}`} alt={title} />
+            <img className="border-2 hover:border-black w-[370px] md:w-[600px]" src={`https://res.cloudinary.com/arblo/image/upload/c_fill,w_600/${image}`} alt={title} />
           </div>
         ) : (
           <></>
