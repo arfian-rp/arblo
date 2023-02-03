@@ -40,7 +40,7 @@ export default function Reply({ reply, _idPost, mode = false }: Props) {
 
   return (
     <div className="text-lg mx-auto rounded-lg my-1 w-[384px] md:w-[600px] border-2 border-primary hover:border-black">
-      <div className="text-left p-3 flex justify-between text-2xl cursor-pointer">
+      <div className="text-left p-3 flex justify-between text-xl cursor-pointer">
         <div onClick={() => router.push(`/u/${reply.author}`)} className="flex items-center gap-3 hover:text-secondary">
           {img == "" ? (
             <img className="border-2 hover:border-black w-[50px] h-[50px] rounded-full border-2 border-primary" src={`/anonim.png`} alt={"profile"} />
