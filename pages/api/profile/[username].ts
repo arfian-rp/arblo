@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const { username } = req.query;
     try {
       const user = await UserModel.findOne({ username });
-      resUtilSuccess(res, { image: user?.image });
+      resUtilSuccess(res, { image: user?.image, gacc: user?.gacc });
     } catch (error) {
       resUtilError(res, { error });
     }

@@ -66,7 +66,7 @@ export default function Profile({ isAuth, userToken, user, posts: initialPosts }
                 ) : (
                   <img className="border-2 hover:border-black w-[50px] h-[50px] rounded-full border-2 border-primary" src={`https://res.cloudinary.com/arblo/image/upload/c_fill,w_100/${user?.image}`} alt={"profile"} />
                 )}
-                <div className="text-xl">{user?.username!}</div>
+                {user?.gacc ? <div className="text-xl underline decoration-gaccCol">{user?.username!}</div> : <div className="text-xl">{user?.username!}</div>}
               </div>
               <div className="flex items-center gap-3 group px-3">
                 <div className="flex flex-col items-center text-lg">

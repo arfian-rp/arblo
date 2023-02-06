@@ -13,6 +13,7 @@ module.exports = {
         primary: "#e2e8f0",
         priHov: "#f8fafc",
         secHov: "#475569",
+        gaccCol: "#1b9afa",
       },
     },
   },

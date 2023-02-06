@@ -11,6 +11,7 @@ export interface UserInterface {
   refreshToken?: string;
   password?: string;
   lock?: boolean;
+  gacc?: boolean;
   createdAt?: number;
   updatedAt?: number;
 }
@@ -52,6 +53,10 @@ const UserSchema = new Schema<UserInterface>({
     required: true,
   },
   lock: {
+    type: Boolean,
+    default: false,
+  },
+  gacc: {
     type: Boolean,
     default: false,
   },

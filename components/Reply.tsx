@@ -14,13 +14,15 @@ interface Props {
 export default function Reply({ reply, _idPost, mode = false }: Props) {
   const router = useRouter();
   const [img, setImg] = useState("");
+  const [gacc, setGacc] = useState(false);
 
   useEffect(() => {
     const param: ReqParamInterface = {
       url: `/api/profile/${reply.author}`,
       method: "get",
-      result: ({ image: img }) => {
+      result: ({ image: img, gacc }) => {
         setImg(img);
+        setGacc(gacc);
       },
     };
     req(param);
@@ -47,7 +49,7 @@ export default function Reply({ reply, _idPost, mode = false }: Props) {
           ) : (
             <img className="border-2 hover:border-black w-[50px] h-[50px] rounded-full border-2 border-primary" src={`https://res.cloudinary.com/arblo/image/upload/c_fill,w_100/${img}`} alt={"profile"} />
           )}
-          {reply.author}
+          {gacc ? <div className="underline decoration-gaccCol">{reply.author}</div> : <div>{reply.author}</div>}
         </div>
         {mode ? (
           <button onClick={del} className="text-sm text-center hover:border-red-500 text-red-500 w-16 ">
