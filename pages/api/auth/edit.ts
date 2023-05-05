@@ -43,6 +43,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               .catch(() => resUtilError(res));
           }
         });
+      }else{
+        if (token) {
+          UserModel.updateOne(
+            { username: token.username },
+            {
+              email: fields.email,
+              web: fields.web,
+              bio: fields.bio,
+              updatedAt: new Date().getTime(),
+            }
+          )
+            .then(() => resUtilSuccess(res))
+            .catch(() => resUtilError(res));
+        }
       }
     });
   } else resUtilError(res);
