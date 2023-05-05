@@ -72,7 +72,7 @@ export default function Edit({ user }: Props) {
           <div className="flex justify-center">
             <input type="file" onChange={(e) => setFile(e.target.files![0])} accept="image/*" name="file" />
           </div>
-          <div className="text-lg mx-auto rounded-lg my-1 w-[350px] md:w-[600px] border-2 border-primary hover:border-black">
+          <div className="text-lg mx-auto rounded-lg my-1 w-[350px] md:w-[600px] border-2 border-primary">
           {img ? (
           <div className="mx-auto">
             <div className="text-center text-xl cursor-pointer">Old photo</div>
