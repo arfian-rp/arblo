@@ -75,6 +75,7 @@ export default function Edit({ user }: Props) {
           <div className="text-lg mx-auto rounded-lg my-1 w-[350px] md:w-[600px] border-2 border-primary hover:border-black">
           {img ? (
           <div className="mx-auto">
+            <div className="text-center text-xl cursor-pointer">Old photo</div>
             <img className="border-2 hover:border-black w-[350px] md:w-[600px]" src={`https://res.cloudinary.com/arblo/image/upload/c_fill,w_600/${img}`} alt={`${username}'s profile`} />
           </div>
         ) : (
