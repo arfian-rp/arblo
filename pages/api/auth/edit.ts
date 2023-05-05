@@ -33,9 +33,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               { username: token.username },
               {
                 image: res2.public_id,
-                email: fields.email,
-                web: fields.web,
-                bio: fields.bio,
                 updatedAt: new Date().getTime(),
               }
             )

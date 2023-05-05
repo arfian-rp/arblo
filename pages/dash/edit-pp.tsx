@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { GetServerSidePropsContext } from "next";
 import Link from "next/link";
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import UserModel, { UserInterface } from "../../model/UserModel";
 import connectDb from "../../utils/connectDb";
@@ -14,27 +14,24 @@ export default function Edit({ user }: Props) {
   const [file, setFile] = useState<File>();
   const [msg, setMsg] = useState("");
   const [username] = useState(user.username);
-  const [email, setEmail] = useState(user.email);
-  const [web, setWeb] = useState(user.web);
-  const [bio, setBio] = useState(user.bio);
+  const [img, setImg] = useState("");
+
+  useEffect(() => {
+    const param: ReqParamInterface = {
+      url: `/api/profile/${username}`,
+      method: "get",
+      result: ({ image: img }) => {
+        setImg(img);
+      },
+    };
+    req(param);
+  }, []);
 
   async function edit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData();
     if (file?.name) {
       formData.append("file", file);
-    }
-    if (username) {
-      formData.append("username", username);
-    }
-    if (email) {
-      formData.append("email", email);
-    }
-    if (web) {
-      formData.append("web", web);
-    }
-    if (bio) {
-      formData.append("bio", bio);
     }
 
     const param: ReqParamInterface = {
@@ -69,20 +66,25 @@ export default function Edit({ user }: Props) {
     <Layout title="Edit Profile" description="edit profile" isAuth={true} username={user.username}>
       <div>
         <form onSubmit={edit} className="border-2 border-black m-auto mt-16 flex flex-col gap-3 py-10 rounded-lg w-[350px] md:w-[600px]">
-          <div className="text-center text-4xl cursor-pointer">Edit Profile</div>
+          <div className="text-center text-4xl cursor-pointer">Edit Photo</div>
           <div className="text-center text-xl cursor-pointer">{msg}</div>
           <div className="flex justify-center">
             <input type="file" onChange={(e) => setFile(e.target.files![0])} accept="image/*" name="file" />
           </div>
-          <div className="flex justify-center">
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value.toLowerCase())} placeholder="email" />
+          <div className="text-lg mx-auto rounded-lg my-1 w-[350px] md:w-[600px] border-2 border-primary hover:border-black">
+          {img ? (
+          <div className="mx-auto">
+            <img className="border-2 hover:border-black w-[350px] md:w-[600px]" src={`https://res.cloudinary.com/arblo/image/upload/c_fill,w_600/${img}`} alt={`${username}'s profile`} />
           </div>
-          <div className="flex justify-center">
-            <input type="text" value={web} onChange={(e) => setWeb(e.target.value.toLowerCase())} placeholder="web" />
+        ) : (
+          <></>
+        )}
           </div>
+      
           <div className="flex justify-center">
-            <textarea value={bio} onChange={(e) => setBio(e.target.value)} />
+            <input type="file" onChange={(e) => setFile(e.target.files![0])} accept="image/*" name="file" />
           </div>
+          
           <div className="flex justify-center">
             <Link href={"/"}>
               <button className="hover:border-red-400 text-red-400">Cancel</button>
