@@ -27,6 +27,7 @@ export default function Edit({ user }: Props) {
     req(param);
   }, []);
 
+
   async function edit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData();
@@ -79,10 +80,6 @@ export default function Edit({ user }: Props) {
         ) : (
           <></>
         )}
-          </div>
-      
-          <div className="flex justify-center">
-            <input type="file" onChange={(e) => setFile(e.target.files![0])} accept="image/*" name="file" />
           </div>
           
           <div className="flex justify-center">
