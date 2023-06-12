@@ -21,7 +21,7 @@ export default function Navbar(props: Props) {
     req(param);
   }, []);
   return (
-    <nav className="flex justify-between px-5 md:px-24  py-3 bg-primary text-secondary font-mono items-center">
+    <nav className="flex justify-between px-5 md:px-24  py-3 bg-primary text-secondary font-mono items-center border-2 border-primary hover:border-black">
       <Link href="/">
         <div className="cursor-pointer std-transition hover:text-secHov text-3xl font-semibold">arblo</div>
       </Link>
