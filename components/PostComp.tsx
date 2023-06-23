@@ -37,7 +37,7 @@ export default function PostComp({ _id, title, body, author, postedAt, mode = fa
       data: { _id, image },
       result: () => (window.location.pathname = `/u/${author}`),
     };
-    if (confirm(`delete '${title?`post: ${title}`:"this post"}'?`)) {
+    if (confirm(`delete '${title?`post: ${title}`:'this post'}'?`)) {
       req(param);
     }
   }
