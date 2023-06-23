@@ -29,6 +29,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             if (err) {
               return console.info(err);
             }
+            if(!fields.title&&!fields.body) resUtilError(res);
+            else{
             new PostModel({
               title: fields.title,
               body: fields.body,
@@ -40,6 +42,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 UserModel.updateOne({ username: token.username }, { $inc: { numberOfPosts: 1 } }).then(() => resUtilSuccess(res));
               })
               .catch(() => resUtilError(res));
+            }
           });
         } else {
           new PostModel({

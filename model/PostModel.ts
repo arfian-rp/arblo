@@ -17,11 +17,9 @@ const PostSchema = new Schema<PostInterface>({
   },
   title: {
     type: String,
-    required: true,
   },
   body: {
     type: String,
-    required: true,
   },
   author: {
     type: String,
