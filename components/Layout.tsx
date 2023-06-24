@@ -15,7 +15,7 @@ export default function Layout({ title, img, children, username, isAuth, descrip
     <>
       <Head>
         <title>{title}</title>
-        <meta property="og:image" content={`https://res.cloudinary.com/arblo/image/upload/c_fill,w_300/${img}`} />
+        <meta property="og:image" content={img=='/anonim.png'?'/anonim.png':`https://res.cloudinary.com/arblo/image/upload/c_fill,w_300/${img}`} />
         <meta name="google-site-verification" content="dxLF11ksIfjF9iH6LmjWJjZ8KR_fktxj8Ihqj-tTdd4" />
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
